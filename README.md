@@ -1,6 +1,6 @@
 # Math-Hunter
 
-#Colaborators:#
+##Colaborators:
 
 - Rene Steinmaurer
 - Yannick Weber
