@@ -6,11 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="303.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField layoutX="134.0" layoutY="80.0" />
-      <Label layoutX="38.0" layoutY="82.0" text="Name:">
+      <TextField id="text-field" fx:id="inputName" layoutX="134.0" layoutY="80.0" stylesheets="@login.css" />
+      <Label fx:id="labelName" layoutX="38.0" layoutY="82.0" stylesheets="@login.css" text="Name:">
          <font>
             <Font size="14.0" />
          </font>
@@ -20,12 +19,12 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="126.0" text="Password:">
+      <Label fx:id="labelPasw" layoutX="38.0" layoutY="126.0" stylesheets="@login.css" text="Password:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="134.0" layoutY="122.0" />
-      <Button layoutX="224.0" layoutY="180.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Login" />
+      <TextField fx:id="inputPasw" layoutX="134.0" layoutY="122.0" stylesheets="@login.css" />
+      <Button id="login" fx:id="buttonLogin" layoutX="224.0" layoutY="180.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" stylesheets="@login.css" text="Login" />
    </children>
 </AnchorPane>
