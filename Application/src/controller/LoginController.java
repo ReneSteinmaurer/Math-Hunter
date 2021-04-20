@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import model.Main;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,6 +15,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+    private Main main;
     private String driver;
     private String url;
     private String name;
@@ -47,7 +49,7 @@ public class LoginController implements Initializable {
                 System.out.println("eingeloggt!");
             }
         }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR,"Username oder Passwort stimmen nicht überein!", ButtonType.APPLY);
+            Alert alert = new Alert(Alert.AlertType.WARNING,"Username oder Passwort stimmen nicht überein!", ButtonType.OK);
             alert.showAndWait();
         }
     }
@@ -65,6 +67,7 @@ public class LoginController implements Initializable {
             pwd = prop.getProperty("password");
         }
         userLogin(url,name,pwd);
+        if (loggedIn) main.loadApplication();
     }
 
     @Override
@@ -72,5 +75,9 @@ public class LoginController implements Initializable {
         buttonLogin.disableProperty().bind(inputName.textProperty().isEmpty());
         buttonLogin.disableProperty().bind(inputPasw.textProperty().isEmpty());
 
+    }
+
+    public void setModel(Main main) {
+        this.main = main;
     }
 }
