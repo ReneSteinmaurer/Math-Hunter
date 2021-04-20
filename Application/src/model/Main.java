@@ -22,10 +22,10 @@ public class Main extends Application {
     public void loadLogin() throws IOException {
         stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
-        stage.setTitle("Hello World");
+        stage.setTitle("Login");
         Scene scene = new Scene(root);
         scene.getStylesheets().add("../view/login.css");
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
         stage.show();
     }
