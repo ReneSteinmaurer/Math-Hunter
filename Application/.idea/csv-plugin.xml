@@ -3,6 +3,13 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="C:\Users\renes\AppData\Roaming\JetBrains\IntelliJIdea2020.3\consoles\db\f61482d6-5929-4445-be63-bc06844270b3\console.sql">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\controller\LoginController.java">
           <value>
             <Attribute>

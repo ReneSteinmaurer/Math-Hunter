@@ -1,59 +1,54 @@
-use math_hunter;
-
-
-create table users(
-    id int(11) NOT NULL,
-    name varchar(45) not null,
+create table  if not exists users
+(
+    id       int NOT NULL auto_increment,
+    name     varchar(45) not null,
     password varchar(45) not null,
     primary key (id)
 );
 
-create table player(
-  id int(11) not null,
-  name varchar(45) not null,
-  level int(11) not null,
-  primary key (id)
+create table if not exists players
+(
+    id    int not null auto_increment,
+    name  varchar(45) not null,
+    points int not null,
+    primary key (id)
 );
 
-create table achievements(
-  id int(11) not null,
-  level int(11) not null,
-  primary key (id)
+create table if not exists player_user
+(
+    playerID int not null auto_increment,
+    userID int not null,
+    playerName varchar(100) not null,
+    primary key (playerID),
+
+    CONSTRAINT playerID FOREIGN KEY (playerID) REFERENCES players (id)
 );
 
-create table items(
-  id int(11) not null,
-  name varchar(45) not null,
-  power varchar(45) not null,
-  primary key (id)
-);
+DELIMITER $$
+create procedure addUser(
+in  usernameIn varchar(100),
+    passwordIn varchar(100),
+    playerNameIn varchar(100)
+)
+begin
+declare userIDvar int;
+declare userNamevar varchar(100);
+select name from users where name = usernameIn into userNamevar;
+if (userNamevar is null ) then
+    insert into users (name, password) values (usernameIn, passwordIn);
+    insert into players (name, points) values (playerNameIn, 0);
+    select id from users where name = usernameIn into userIDvar;
+    insert into player_user (userID, playerName) values (userIDvar, playerNameIn);
+end if;
+end $$;
 
-create table player_user(
-  playerID int(11) not null,
-  userID int(11) not null,
-  primary key (playerID, userID),
+select * from USERS;
 
-  CONSTRAINT playerID FOREIGN KEY (playerID) REFERENCES player(id),
-  CONSTRAINT userID FOREIGN KEY (userID) REFERENCES users(id)
-);
-
-create table player_achievement(
-    playerID int(11) not null,
-    achievementID int(11) not null,
-    primary key (playerID, achievementID),
-    CONSTRAINT playID FOREIGN KEY (playerID) REFERENCES player(id),
-    CONSTRAINT achievementID FOREIGN KEY (achievementID) REFERENCES achievements(id)
-
-);
-
-create table player_item(
-    playerID int(11) not null,
-    itemID int(11) not null,
-    primary key (playerID, itemID),
-    CONSTRAINT playerItemID FOREIGN KEY (playerID) REFERENCES player(id),
-    CONSTRAINT itemID FOREIGN KEY (itemID) REFERENCES items(id)
-
-);
+call addUser('Yannick Weber', '389u4sdj', 'YanWeb10');
+call addUser('Rene Steinmaurer', '34u50jkdf', 'Steini94');
+call addUser('Peter Sandratsch', '349jeoifsdfss', 'Sandratsch');
+call addUser('Peter Sandratsch', '34sdfsdf', 'Sandratsch44');
+call addUser('Anton Schachl', 'asdfio4wskldfasldkjf', 'Schachi93');
 
 
 
