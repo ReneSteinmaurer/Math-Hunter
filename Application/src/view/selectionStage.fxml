@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="selectionPane" prefHeight="293.0" prefWidth="450.0" style="-fx-background-color: #203647;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectionController">
    <children>
       <Label fx:id="selectionLabel" layoutX="14.0" layoutY="14.0" text="Spielauswahl:" textFill="#4da8da">
