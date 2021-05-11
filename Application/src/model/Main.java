@@ -1,7 +1,6 @@
 package model;
 
-import controller.LoginController;
-import controller.SelectionController;
+import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +15,9 @@ public class Main extends Application {
     private Stage stage;
     private LoginController loginController = new LoginController();
     private SelectionController selectionController = new SelectionController();
+    private MathController mathController= new MathController();
+    private GermanController germanController = new GermanController();
+    private EnglischController englischController = new EnglischController();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -53,8 +55,55 @@ public class Main extends Application {
     }
 
 
+
+
     public static void main(String[] args) {
         launch(args);
 
+    }
+
+    public void loadEnglischWindow() throws IOException {
+        stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/englischScene.fxml"));
+        Parent root = loader.load();
+        stage.setTitle("Englisch");
+        Scene scene = new Scene(root);
+        englischController = loader.getController();
+        scene.getStylesheets().add("../view/login.css");
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setScene(scene);
+        stage.show();
+
+
+    }
+
+    public void loadGermanWindow() throws IOException {
+        stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/germanScene.fxml"));
+        Parent root = loader.load();
+        stage.setTitle("German");
+        Scene scene = new Scene(root);
+        germanController = loader.getController();
+        scene.getStylesheets().add("../view/login.css");
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    public void loadMathWindows() throws IOException {
+        stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/mathScene.fxml"));
+        Parent root = loader.load();
+        stage.setTitle("Math");
+        Scene scene = new Scene(root);
+        mathController = loader.getController();
+        scene.getStylesheets().add("../view/login.css");
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setScene(scene);
+        stage.show();
     }
 }
