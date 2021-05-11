@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import model.DatabaseManagement;
 import model.Main;
 
 import java.io.FileInputStream;
@@ -16,11 +17,10 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
     private Main main;
-    private String driver;
-    private String url;
-    private String name;
-    private String pwd;
+    private DatabaseManagement dbm;
     private boolean loggedIn = false;
+    private Statement stmt;
+    private ResultSet rs;
 
     @FXML private TextField inputName;
     @FXML private Label labelName;
@@ -28,45 +28,35 @@ public class LoginController implements Initializable {
     @FXML private TextField inputPasw;
     @FXML private Button buttonLogin;
 
-    private void userLogin(String url, String name, String pwd) throws SQLException {
-        Connection con;
-        Statement stmt;
-        ResultSet rs;
-        String sql;
+    private void userLogin() throws SQLException {
 
-        con = DriverManager.getConnection(url, name, pwd);
-        stmt = con.createStatement();
-        sql = "select * from users where name = '"+ inputName.getText()+"'";
-        rs = stmt.executeQuery(sql);
+        try (PreparedStatement ps = dbm.getCon().prepareStatement(
+                "select * from users where name = ?")){
 
-        if (rs.next()) {
-            System.out.printf("%d, %s, %s \n",
-                    rs.getInt(1),
-                    rs.getString(2),
-                    rs.getString(3));
-            if (inputPasw.getText().equals(rs.getString(3))) {
-                loggedIn = true;
-                System.out.println("eingeloggt!");
+            ps.setString(1,inputName.getText());
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                System.out.printf("%d, %s, %s \n",
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3));
+                if (inputPasw.getText().equals(rs.getString(3))) {
+                    loggedIn = true;
+                    System.out.println("eingeloggt!");
+                }
+            }else {
+                Alert alert = new Alert(Alert.AlertType.WARNING,"Username oder Passwort stimmen nicht überein!", ButtonType.OK);
+                alert.showAndWait();
             }
-        }else {
-            Alert alert = new Alert(Alert.AlertType.WARNING,"Username oder Passwort stimmen nicht überein!", ButtonType.OK);
-            alert.showAndWait();
         }
     }
 
     @FXML
     void login(ActionEvent event) throws SQLException, IOException {
-        Properties prop = new Properties();
-
-        try (FileInputStream in = new FileInputStream("dbconnect.properties")) {
-
-            prop.load(in);
-            driver = prop.getProperty("driver");
-            url = prop.getProperty("url");
-            name = prop.getProperty("name");
-            pwd = prop.getProperty("password");
-        }
-        userLogin(url,name,pwd);
+        dbm = new DatabaseManagement();
+        userLogin();
         if (loggedIn) main.loadApplication();
     }
 
