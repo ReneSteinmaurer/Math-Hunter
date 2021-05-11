@@ -7,18 +7,16 @@ import javafx.scene.control.*;
 import model.DatabaseManagement;
 import model.Main;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-    private Main main;
+    private Main model;
     private DatabaseManagement dbm;
     private boolean loggedIn = false;
+    private boolean startedOnce = true;
     private Statement stmt;
     private ResultSet rs;
 
@@ -31,10 +29,9 @@ public class LoginController implements Initializable {
     private void userLogin() throws SQLException {
 
         try (PreparedStatement ps = dbm.getCon().prepareStatement(
-                "select * from users where name = ?")){
+                "select * from users where name = ?")) {
 
             ps.setString(1,inputName.getText());
-
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -55,9 +52,12 @@ public class LoginController implements Initializable {
 
     @FXML
     void login(ActionEvent event) throws SQLException, IOException {
-        dbm = new DatabaseManagement();
+        if (startedOnce) {
+            startedOnce = false;
+            dbm = new DatabaseManagement();
+        }
         userLogin();
-        if (loggedIn) main.loadApplication();
+        if (loggedIn) model.loadApplication();
     }
 
     @Override
@@ -67,6 +67,6 @@ public class LoginController implements Initializable {
     }
 
     public void setModel(Main main) {
-        this.main = main;
+        model = main;
     }
 }
