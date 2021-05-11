@@ -72,8 +72,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        buttonLogin.disableProperty().bind(inputName.textProperty().isEmpty());
-        buttonLogin.disableProperty().bind(inputPasw.textProperty().isEmpty());
+        buttonLogin.disableProperty().bind(inputName.textProperty().isEmpty().or(inputPasw.textProperty().isEmpty()));
 
     }
 
