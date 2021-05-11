@@ -35,7 +35,7 @@ public class Main extends Application {
 
     public void loadApplication() throws IOException {
         stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../view/selectionStage.fxml"));
         stage.setTitle("Application");
         Scene scene = new Scene(root);
         scene.getStylesheets().add("../view/login.css");
