@@ -1,6 +1,7 @@
 package model;
 
 import controller.LoginController;
+import controller.SelectionController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,7 @@ import java.io.IOException;
 public class Main extends Application {
     private Stage stage;
     private LoginController loginController = new LoginController();
+    private SelectionController selectionController = new SelectionController();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -23,9 +25,12 @@ public class Main extends Application {
 
     public void loadLogin() throws IOException {
         stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/login.fxml"));
+        Parent root = loader.load();
         stage.setTitle("Login");
         Scene scene = new Scene(root);
+        loginController = loader.getController();
         loginController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
         stage.initStyle(StageStyle.DECORATED);
@@ -35,9 +40,12 @@ public class Main extends Application {
 
     public void loadApplication() throws IOException {
         stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/selectionStage.fxml"));
-        stage.setTitle("Application");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/selectionStage.fxml"));
+        Parent root = loader.load();
+        stage.setTitle("Selection");
         Scene scene = new Scene(root);
+        selectionController = loader.getController();
         scene.getStylesheets().add("../view/login.css");
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);

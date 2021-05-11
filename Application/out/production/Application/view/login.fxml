@@ -6,25 +6,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="controller.LoginController" id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="303.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="303.0" style="-fx-background-color: #203647;" stylesheets="@login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <TextField id="text-field" fx:id="inputName" layoutX="134.0" layoutY="80.0" stylesheets="@login.css" />
-      <Label fx:id="labelName" layoutX="38.0" layoutY="82.0" stylesheets="@login.css" text="Name:">
+      <TextField id="text-field" fx:id="inputName" layoutX="134.0" layoutY="80.0" style="-fx-background-color: #007CC7;" stylesheets="@login.css" />
+      <Label fx:id="labelName" layoutX="38.0" layoutY="82.0" stylesheets="@login.css" text="Name:" textFill="#4da8da">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="79.0" layoutY="14.0" text="MathHunter">
+      <Label layoutX="79.0" layoutY="14.0" text="MathHunter" textFill="#4da8da">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="labelPasw" layoutX="38.0" layoutY="126.0" stylesheets="@login.css" text="Password:">
+      <Label fx:id="labelPasw" layoutX="38.0" layoutY="126.0" stylesheets="@login.css" text="Password:" textFill="#4da8da">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="inputPasw" layoutX="134.0" layoutY="122.0" stylesheets="@login.css" />
-      <Button id="login" fx:id="buttonLogin" layoutX="224.0" layoutY="180.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="62.0" stylesheets="@login.css" text="Login" />
+      <TextField fx:id="inputPasw" layoutX="134.0" layoutY="122.0" style="-fx-background-color: #007CC7;" stylesheets="@login.css" />
+      <Button id="button" fx:id="buttonLogin" layoutX="224.0" layoutY="180.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #68FCBC;" stylesheets="@login.css" text="Login" />
+      <Button id="button" layoutX="14.0" layoutY="180.0" mnemonicParsing="false" style="-fx-background-color: #68FCBC;" stylesheets="@login.css" text="Register" />
    </children>
 </AnchorPane>

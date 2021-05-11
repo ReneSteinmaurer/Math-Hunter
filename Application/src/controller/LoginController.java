@@ -46,6 +46,8 @@ public class LoginController implements Initializable {
             }else {
                 Alert alert = new Alert(Alert.AlertType.WARNING,"Username oder Passwort stimmen nicht überein!", ButtonType.OK);
                 alert.showAndWait();
+                inputPasw.clear();
+                inputName.clear();
             }
         }
     }

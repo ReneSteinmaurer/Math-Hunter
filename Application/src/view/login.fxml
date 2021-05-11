@@ -26,5 +26,6 @@
       </Label>
       <TextField fx:id="inputPasw" layoutX="134.0" layoutY="122.0" style="-fx-background-color: #007CC7;" stylesheets="@login.css" />
       <Button id="button" fx:id="buttonLogin" layoutX="224.0" layoutY="180.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #68FCBC;" stylesheets="@login.css" text="Login" />
+      <Button id="button" layoutX="14.0" layoutY="180.0" mnemonicParsing="false" style="-fx-background-color: #68FCBC;" stylesheets="@login.css" text="Register" />
    </children>
 </AnchorPane>
