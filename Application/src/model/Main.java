@@ -14,6 +14,7 @@ import java.io.IOException;
 public class Main extends Application {
     private Stage stage;
     private LoginController loginController = new LoginController();
+    private RegisterController registerController = new RegisterController();
     private SelectionController selectionController = new SelectionController();
     private MathController mathController= new MathController();
     private GermanController germanController = new GermanController();
@@ -49,6 +50,22 @@ public class Main extends Application {
         stage.setTitle("Selection");
         Scene scene = new Scene(root);
         selectionController = loader.getController();
+        scene.getStylesheets().add("../view/login.css");
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void loadRegister() throws IOException {
+        stage.close();
+        stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/register.fxml"));
+        Parent root = loader.load();
+        stage.setTitle("Register");
+        Scene scene = new Scene(root);
+        registerController = loader.getController();
+        registerController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);

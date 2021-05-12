@@ -23,33 +23,13 @@ public class LoginController implements Initializable {
     @FXML private TextField inputName;
     @FXML private Label labelName;
     @FXML private Label labelPasw;
-    @FXML private TextField inputPasw;
+    @FXML private PasswordField pwdField;
     @FXML private Button buttonLogin;
+    @FXML private Button buttonRegister;
 
-    private void userLogin() throws SQLException {
-
-        try (PreparedStatement ps = dbm.getCon().prepareStatement(
-                "select * from users where name = ?")) {
-
-            ps.setString(1, inputName.getText());
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                System.out.printf("%d, %s, %s \n",
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3));
-                if (inputPasw.getText().equals(rs.getString(3))) {
-                    loggedIn = true;
-                    System.out.println("eingeloggt!");
-                }
-            }else {
-                Alert alert = new Alert(Alert.AlertType.WARNING,"Username oder Passwort stimmen nicht überein!", ButtonType.OK);
-                alert.showAndWait();
-                inputPasw.clear();
-                inputName.clear();
-            }
-        }
+    @FXML
+    void register(ActionEvent event) throws SQLException, IOException {
+        model.loadRegister();
     }
 
     @FXML
@@ -58,13 +38,17 @@ public class LoginController implements Initializable {
             startedOnce = false;
             dbm = new DatabaseManagement();
         }
-        userLogin();
+        loggedIn = dbm.userLogin(inputName.getText(),pwdField.getText());
         if (loggedIn) model.loadApplication();
+        else {
+            inputName.clear();
+            pwdField.clear();
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        buttonLogin.disableProperty().bind(inputName.textProperty().isEmpty().or(inputPasw.textProperty().isEmpty()));
+        buttonLogin.disableProperty().bind(inputName.textProperty().isEmpty().or(pwdField.textProperty().isEmpty()));
 
     }
 
