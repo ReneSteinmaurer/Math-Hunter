@@ -41,6 +41,7 @@ public class Main extends Application {
     }
 
     public void loadApplication() throws IOException {
+        stage.close();
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/selectionStage.fxml"));
@@ -54,13 +55,6 @@ public class Main extends Application {
         stage.show();
     }
 
-
-
-
-    public static void main(String[] args) {
-        launch(args);
-
-    }
 
     public void loadEnglischWindow() throws IOException {
         stage = new Stage();
@@ -105,5 +99,12 @@ public class Main extends Application {
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
         stage.show();
+    }
+
+
+
+    public static void main(String[] args) {
+        launch(args);
+
     }
 }

@@ -17,7 +17,7 @@ public class DatabaseManagement {
         String name;
         String pwd;
 
-        try (FileInputStream in = new FileInputStream("dbconnect.properties")) {
+        try (FileInputStream in = new FileInputStream("Application/dbconnect.properties")) {
             prop.load(in);
             url = prop.getProperty("url");
             name = prop.getProperty("name");

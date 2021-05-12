@@ -31,7 +31,7 @@ public class LoginController implements Initializable {
         try (PreparedStatement ps = dbm.getCon().prepareStatement(
                 "select * from users where name = ?")) {
 
-            ps.setString(1,inputName.getText());
+            ps.setString(1, inputName.getText());
             rs = ps.executeQuery();
 
             if (rs.next()) {
