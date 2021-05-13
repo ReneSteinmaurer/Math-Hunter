@@ -1,54 +1,75 @@
-create table  if not exists users
+create table if not exists users
 (
-    id       int NOT NULL auto_increment,
-    name     varchar(45) not null,
-    password varchar(45) not null,
-    primary key (id)
+    name     varchar(45) not null primary key,
+    password varchar(45) not null
 );
 
 create table if not exists players
 (
-    id    int not null auto_increment,
-    name  varchar(45) not null,
-    points int not null,
+    id     int         not null auto_increment,
+    name   varchar(45) not null,
+    points int         not null,
     primary key (id)
 );
 
-create table if not exists player_user
+create table if not exists user_player
 (
-    playerID int not null auto_increment,
-    userID int not null,
+    playerID   int          not null auto_increment,
+    userName   varchar(100) not null,
     playerName varchar(100) not null,
-    primary key (playerID),
 
-    CONSTRAINT playerID FOREIGN KEY (playerID) REFERENCES players (id)
+    primary key (playerID),
+    CONSTRAINT players FOREIGN KEY (playerID) REFERENCES players (id)
+);
+
+create table if not exists vocabs
+(
+    germanVocab   varchar(100) not null primary key,
+    englischVocab varchar(100)
 );
 
 DELIMITER $$
+
+create procedure addVocab(
+    in germanVocabIn varchar(100),
+    englischVocabIn varchar(100)
+)
+begin
+    declare existsVocab int(50);
+    select germanVocab from vocabs where germanVocab = germanVocabIn into existsVocab;
+    if (existsVocab is null) then
+        insert into vocabs (germanVocab, englischVocab)
+        values (germanVocabIn, englischVocabIn);
+    end if;
+end $$
+
 create procedure addUser(
-in  usernameIn varchar(100),
+    in usernameIn varchar(100),
     passwordIn varchar(100),
     playerNameIn varchar(100)
 )
 begin
-declare userIDvar int;
-declare userNamevar varchar(100);
-select name from users where name = usernameIn into userNamevar;
-if (userNamevar is null ) then
-    insert into users (name, password) values (usernameIn, passwordIn);
-    insert into players (name, points) values (playerNameIn, 0);
-    select id from users where name = usernameIn into userIDvar;
-    insert into player_user (userID, playerName) values (userIDvar, playerNameIn);
-end if;
+    declare playerIDVar int;
+    declare userNamevar varchar(100);
+    select name from users where name = usernameIn into userNamevar;
+    if (userNamevar is null) then
+        insert into users (name, password) values (usernameIn, passwordIn);
+        insert into players (name, points) values (playerNameIn, 0);
+        select id from players where playerNameIn = name into playerIDVar;
+        insert into user_player (playerID, userName, playerName) values (playerID, usernameIn, playerNameIn);
+    end if;
 end $$;
 
-select * from USERS;
+call addUser('root', 'admin', 'ADMIN');
+call addUser('test', 'admin', 'testPlayer');
+call addUser('test2', 'admin', 'test');
 
-call addUser('Yannick Weber', '389u4sdj', 'YanWeb10');
-call addUser('Rene Steinmaurer', '34u50jkdf', 'Steini94');
-call addUser('Peter Sandratsch', '349jeoifsdfss', 'Sandratsch');
-call addUser('Peter Sandratsch', '34sdfsdf', 'Sandratsch44');
-call addUser('Anton Schachl', 'asdfio4wskldfasldkjf', 'Schachi93');
+call addVocab('Tisch', 'desk');
+call addVocab('unterscheiden', 'distinguish');
+call addVocab('Abend', 'evening');
+call addVocab('aber', 'however');
+call addVocab('alles', 'everything');
+
 
 
 

@@ -85,11 +85,10 @@ public class Main extends Application {
         englischController = loader.getController();
         englischController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
         stage.show();
-
-
     }
 
     public void loadGermanWindow() throws IOException {
@@ -131,6 +130,7 @@ public class Main extends Application {
         addVocabController = loader.getController();
         addVocabController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
         stage.show();
@@ -141,7 +141,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
     }
 
 

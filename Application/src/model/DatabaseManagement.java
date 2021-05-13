@@ -32,13 +32,31 @@ public class DatabaseManagement {
     }
 
     public void addUser(String name, String pwd, String playerName) throws SQLException {
-        try (PreparedStatement ps = con.prepareStatement(
-                "call addUser(?,?,?)")) {
+        if (!name.isEmpty() && !pwd.isEmpty() && !playerName.isEmpty()) {
+            try (PreparedStatement ps2 = con.prepareStatement(
+                    "call addUser(?,?,?)")) {
+                try (PreparedStatement ps = con.prepareStatement(
+                        "select count(*) from users where name = ?")) {
+                    ps.setString(1, name);
+                    rs = ps.executeQuery();
+                    rs.next();
 
-            ps.setString(1, name);
-            ps.setString(2, pwd);
-            ps.setString(3, playerName);
-            rs = ps.executeQuery();
+                    if (rs.getInt(1) >= 1) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Dieser User ist bereits vorhanden!", ButtonType.OK);
+                        alert.showAndWait();
+                    } else {
+                        ps2.setString(1, name);
+                        ps2.setString(2, pwd);
+                        ps2.setString(3, playerName);
+                        ps2.executeQuery();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION, "User hinzugefügt!", ButtonType.OK);
+                        alert.showAndWait();
+                    }
+                }
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Bitte alle Felder ausfüllen!", ButtonType.OK);
+            alert.showAndWait();
         }
     }
 
@@ -51,16 +69,15 @@ public class DatabaseManagement {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                System.out.printf("%d, %s, %s \n",
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3));
-                if (pwd.equals(rs.getString(3))) {
+                System.out.printf("%s, %s \n",
+                        rs.getString(1),
+                        rs.getString(2));
+                if (pwd.equals(rs.getString(2))) {
                     loggedIn = true;
                     System.out.println("eingeloggt!");
                 }
-            }else {
-                Alert alert = new Alert(Alert.AlertType.WARNING,"Username oder Passwort stimmen nicht überein!", ButtonType.OK);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Username oder Passwort stimmen nicht überein!", ButtonType.OK);
                 alert.showAndWait();
             }
         }
