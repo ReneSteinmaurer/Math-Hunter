@@ -19,6 +19,7 @@ public class Main extends Application {
     private MathController mathController= new MathController();
     private GermanController germanController = new GermanController();
     private EnglischController englischController = new EnglischController();
+    AddVocabController addVocabController= new AddVocabController();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -50,6 +51,7 @@ public class Main extends Application {
         stage.setTitle("Selection");
         Scene scene = new Scene(root);
         selectionController = loader.getController();
+        selectionController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
@@ -81,6 +83,7 @@ public class Main extends Application {
         stage.setTitle("Englisch");
         Scene scene = new Scene(root);
         englischController = loader.getController();
+        englischController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
@@ -118,10 +121,28 @@ public class Main extends Application {
         stage.show();
     }
 
+    public void loadAddWindow() throws IOException {
+        stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/addWindow.fxml"));
+        Parent root = loader.load();
+        stage.setTitle("AddWindow");
+        Scene scene = new Scene(root);
+        addVocabController = loader.getController();
+        addVocabController.setModel(this);
+        scene.getStylesheets().add("../view/login.css");
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
 
 
     public static void main(String[] args) {
         launch(args);
 
     }
+
+
 }
