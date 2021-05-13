@@ -9,7 +9,7 @@
 
 <AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="303.0" style="-fx-background-color: #203647;" stylesheets="@login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <TextField id="text-field" fx:id="inputName" layoutX="134.0" layoutY="80.0" style="-fx-background-color: #007CC7;" stylesheets="@login.css" />
+      <TextField id="text-field" fx:id="inputName" layoutX="134.0" layoutY="80.0" style="-fx-background-color: #007CC7; -fx-border-color: #203647;" stylesheets="@login.css" />
       <Label fx:id="labelName" layoutX="38.0" layoutY="82.0" stylesheets="@login.css" text="Name:" textFill="#4da8da">
          <font>
             <Font size="14.0" />
@@ -27,6 +27,6 @@
       </Label>
       <Button id="button" fx:id="buttonLogin" layoutX="224.0" layoutY="180.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #68FCBC;" stylesheets="@login.css" text="Login" />
       <Button id="button" fx:id="buttonRegister" layoutX="14.0" layoutY="180.0" mnemonicParsing="false" onAction="#register" style="-fx-background-color: #68FCBC;" stylesheets="@login.css" text="Register" />
-      <PasswordField id="text-field" fx:id="pwdField" layoutX="135.0" layoutY="124.0" style="-fx-background-color: #007CC7;" stylesheets="@login.css" />
+      <PasswordField id="text-field" fx:id="pwdField" layoutX="135.0" layoutY="124.0" style="-fx-background-color: #007CC7; -fx-border-color: #203647;" stylesheets="@login.css" />
    </children>
 </AnchorPane>

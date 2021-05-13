@@ -26,9 +26,9 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="usernameField" layoutX="107.0" layoutY="67.0" style="-fx-background-color: #007CC7;" />
-      <PasswordField fx:id="pwdField" layoutX="107.0" layoutY="106.0" style="-fx-background-color: #007CC7;" />
-      <TextField fx:id="nicknameField" layoutX="107.0" layoutY="142.0" style="-fx-background-color: #007CC7;" />
+      <TextField fx:id="usernameField" layoutX="107.0" layoutY="67.0" style="-fx-background-color: #007CC7; -fx-border-color: #203647;" />
+      <PasswordField fx:id="pwdField" layoutX="107.0" layoutY="106.0" style="-fx-background-color: #007CC7; -fx-border-color: #203647;" />
+      <TextField fx:id="nicknameField" layoutX="107.0" layoutY="142.0" style="-fx-background-color: #007CC7; -fx-border-color: #203647;" />
       <Button fx:id="buttonRegister" layoutX="229.0" layoutY="189.0" mnemonicParsing="false" onAction="#register" style="-fx-background-color: #68FCBC;" text="Register" />
    </children>
 </AnchorPane>
