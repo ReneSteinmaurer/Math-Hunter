@@ -51,13 +51,8 @@ public class EnglischController {
     }
 
     @FXML
-    void addVocabulary(ActionEvent event) {
-        try {
-            model.loadAddWindow();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    void addVocabulary(ActionEvent event) throws IOException {
+        model.loadAddWindow();
     }
 
     @FXML

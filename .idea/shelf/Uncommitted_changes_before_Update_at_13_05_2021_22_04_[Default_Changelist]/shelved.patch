@@ -1,0 +1,65 @@
+Index: Application/src/model/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport controller.*;\r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.stage.Modality;\r\nimport javafx.stage.Stage;\r\nimport javafx.stage.StageStyle;\r\n\r\nimport java.io.IOException;\r\n\r\npublic class Main extends Application {\r\n    private Stage stage;\r\n    private LoginController loginController = new LoginController();\r\n    private RegisterController registerController = new RegisterController();\r\n    private SelectionController selectionController = new SelectionController();\r\n    private MathController mathController= new MathController();\r\n    private GermanController germanController = new GermanController();\r\n    private EnglischController englischController = new EnglischController();\r\n\r\n    @Override\r\n    public void start(Stage primaryStage) throws Exception{\r\n        stage = primaryStage;\r\n        loadLogin();\r\n    }\r\n\r\n    public void loadLogin() throws IOException {\r\n        stage = new Stage();\r\n        FXMLLoader loader = new FXMLLoader();\r\n        loader.setLocation(getClass().getResource(\"../view/login.fxml\"));\r\n        Parent root = loader.load();\r\n        stage.setTitle(\"Login\");\r\n        Scene scene = new Scene(root);\r\n        loginController = loader.getController();\r\n        loginController.setModel(this);\r\n        scene.getStylesheets().add(\"../view/login.css\");\r\n        stage.initStyle(StageStyle.DECORATED);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n    public void loadApplication() throws IOException {\r\n        stage.close();\r\n        stage = new Stage();\r\n        FXMLLoader loader = new FXMLLoader();\r\n        loader.setLocation(getClass().getResource(\"../view/selectionStage.fxml\"));\r\n        Parent root = loader.load();\r\n        stage.setTitle(\"Selection\");\r\n        Scene scene = new Scene(root);\r\n        selectionController = loader.getController();\r\n        scene.getStylesheets().add(\"../view/login.css\");\r\n        stage.initStyle(StageStyle.DECORATED);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n    public void loadRegister() throws IOException {\r\n        stage.close();\r\n        stage = new Stage();\r\n        FXMLLoader loader = new FXMLLoader();\r\n        loader.setLocation(getClass().getResource(\"../view/register.fxml\"));\r\n        Parent root = loader.load();\r\n        stage.setTitle(\"Register\");\r\n        Scene scene = new Scene(root);\r\n        registerController = loader.getController();\r\n        registerController.setModel(this);\r\n        scene.getStylesheets().add(\"../view/login.css\");\r\n        stage.initStyle(StageStyle.DECORATED);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n\r\n    public void loadEnglischWindow() throws IOException {\r\n        stage = new Stage();\r\n        FXMLLoader loader = new FXMLLoader();\r\n        loader.setLocation(getClass().getResource(\"../view/englischScene.fxml\"));\r\n        Parent root = loader.load();\r\n        stage.setTitle(\"Englisch\");\r\n        Scene scene = new Scene(root);\r\n        englischController = loader.getController();\r\n        scene.getStylesheets().add(\"../view/login.css\");\r\n        stage.initStyle(StageStyle.DECORATED);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n\r\n\r\n    }\r\n\r\n    public void loadGermanWindow() throws IOException {\r\n        stage = new Stage();\r\n        FXMLLoader loader = new FXMLLoader();\r\n        loader.setLocation(getClass().getResource(\"../view/germanScene.fxml\"));\r\n        Parent root = loader.load();\r\n        stage.setTitle(\"German\");\r\n        Scene scene = new Scene(root);\r\n        germanController = loader.getController();\r\n        scene.getStylesheets().add(\"../view/login.css\");\r\n        stage.initStyle(StageStyle.DECORATED);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n\r\n    }\r\n\r\n    public void loadMathWindows() throws IOException {\r\n        stage = new Stage();\r\n        FXMLLoader loader = new FXMLLoader();\r\n        loader.setLocation(getClass().getResource(\"../view/mathScene.fxml\"));\r\n        Parent root = loader.load();\r\n        stage.setTitle(\"Math\");\r\n        Scene scene = new Scene(root);\r\n        mathController = loader.getController();\r\n        scene.getStylesheets().add(\"../view/login.css\");\r\n        stage.initStyle(StageStyle.DECORATED);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n\r\n\r\n    public static void main(String[] args) {\r\n        launch(args);\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Application/src/model/Main.java b/Application/src/model/Main.java
+--- a/Application/src/model/Main.java	(revision cd4e86330351d4fcfef90f679c0a46301231226e)
++++ b/Application/src/model/Main.java	(date 1620933499432)
+@@ -122,6 +122,5 @@
+ 
+     public static void main(String[] args) {
+         launch(args);
+-
+     }
+ }
+Index: Application/src/model/DatabaseManagement.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport javafx.scene.control.Alert;\r\nimport javafx.scene.control.ButtonType;\r\n\r\nimport java.io.FileInputStream;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.IOException;\r\nimport java.sql.*;\r\nimport java.util.Properties;\r\n\r\npublic class DatabaseManagement {\r\n    private Connection con;\r\n    private ResultSet rs;\r\n    private Statement stmt;\r\n\r\n    public DatabaseManagement() throws IOException, SQLException {\r\n        Properties prop = new Properties();\r\n        String url;\r\n        String name;\r\n        String pwd;\r\n\r\n        try (FileInputStream in = new FileInputStream(\"Application/dbconnect.properties\")) {\r\n            prop.load(in);\r\n            url = prop.getProperty(\"url\");\r\n            name = prop.getProperty(\"name\");\r\n            pwd = prop.getProperty(\"password\");\r\n            con = DriverManager.getConnection(url, name, pwd);\r\n            stmt = con.createStatement();\r\n            System.out.println(\"Connected to db...\");\r\n        }\r\n    }\r\n\r\n    public void addUser(String name, String pwd, String playerName) throws SQLException {\r\n        try (PreparedStatement ps = con.prepareStatement(\r\n                \"call addUser(?,?,?)\")) {\r\n\r\n            ps.setString(1, name);\r\n            ps.setString(2, pwd);\r\n            ps.setString(3, playerName);\r\n            rs = ps.executeQuery();\r\n        }\r\n    }\r\n\r\n    public boolean userLogin(String name, String pwd) throws SQLException {\r\n        boolean loggedIn = false;\r\n        try (PreparedStatement ps = con.prepareStatement(\r\n                \"select * from users where name = ?\")) {\r\n\r\n            ps.setString(1, name);\r\n            rs = ps.executeQuery();\r\n\r\n            if (rs.next()) {\r\n                System.out.printf(\"%d, %s, %s \\n\",\r\n                        rs.getInt(1),\r\n                        rs.getString(2),\r\n                        rs.getString(3));\r\n                if (pwd.equals(rs.getString(3))) {\r\n                    loggedIn = true;\r\n                    System.out.println(\"eingeloggt!\");\r\n                }\r\n            }else {\r\n                Alert alert = new Alert(Alert.AlertType.WARNING,\"Username oder Passwort stimmen nicht überein!\", ButtonType.OK);\r\n                alert.showAndWait();\r\n            }\r\n        }\r\n        return loggedIn;\r\n    }\r\n\r\n    public Connection getCon() {\r\n        return con;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Application/src/model/DatabaseManagement.java b/Application/src/model/DatabaseManagement.java
+--- a/Application/src/model/DatabaseManagement.java	(revision cd4e86330351d4fcfef90f679c0a46301231226e)
++++ b/Application/src/model/DatabaseManagement.java	(date 1620936162424)
+@@ -32,13 +32,30 @@
+     }
+ 
+     public void addUser(String name, String pwd, String playerName) throws SQLException {
+-        try (PreparedStatement ps = con.prepareStatement(
+-                "call addUser(?,?,?)")) {
+-
+-            ps.setString(1, name);
+-            ps.setString(2, pwd);
+-            ps.setString(3, playerName);
+-            rs = ps.executeQuery();
++        if (!name.isEmpty() && !pwd.isEmpty() && !playerName.isEmpty()) {
++            try (PreparedStatement ps = con.prepareStatement(
++                    "select count(*) from users where name = ?")) {
++                ps.setString(1, name);
++                rs = ps.executeQuery();
++
++                if (rs.getInt(1) >= 1) {
++                    Alert alert = new Alert(Alert.AlertType.INFORMATION,"Dieser User ist bereits vorhanden!", ButtonType.OK);
++                    alert.showAndWait();
++                } else {
++                    try (PreparedStatement ps2 = con.prepareStatement(
++                            "call addUser(?,?,?)")) {
++                        ps2.setString(1, name);
++                        ps2.setString(2, pwd);
++                        ps2.setString(3, playerName);
++                        rs = ps2.executeQuery();
++                        Alert alert = new Alert(Alert.AlertType.INFORMATION,"User hinzugefügt!", ButtonType.OK);
++                        alert.showAndWait();
++                    }
++                }
++            }
++        } else {
++            Alert alert = new Alert(Alert.AlertType.INFORMATION,"Bitte alle Felder ausfüllen!", ButtonType.OK);
++            alert.showAndWait();
+         }
+     }
+ 
