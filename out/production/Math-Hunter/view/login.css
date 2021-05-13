@@ -1,0 +1,28 @@
+#login {
+    -fx-background-color: #BFBFBF;
+    -fx-border-color: #595959;
+    -fx-border-style: solid;
+}
+
+#login:hover {
+    -fx-background-color: rgba(1, 12, 47, 0.63);
+    -fx-border-color: #595959;
+}
+
+.text-field {
+    -fx-background-color: #969696;
+    -fx-border-color: #969696;
+}
+
+.text-field:hover {
+    -fx-border-color: #F26835;
+}
+
+
+#close {
+    -fx-background-color: #969696;
+}
+
+#close:hover {
+    -fx-background-color: #F26835;
+}

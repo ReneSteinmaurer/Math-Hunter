@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="pane" prefHeight="145.0" prefWidth="314.0" style="-fx-background-color: #203647;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddVocabController">
+   <children>
+      <Label fx:id="addLabel" layoutX="14.0" layoutY="14.0" text="Wort hinzufügen:" textFill="#4da8da">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="germanField" layoutX="14.0" layoutY="60.0" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #007CC7;" />
+      <TextField fx:id="englishField" layoutX="171.0" layoutY="60.0" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #007CC7;" />
+      <Button fx:id="addButton" layoutX="222.0" layoutY="106.0" mnemonicParsing="false" style="-fx-background-color: #68FCBC;" text="Hinzufügen" />
+      <Label fx:id="germanLabel" layoutX="14.0" layoutY="43.0" text="Deutsch:" textFill="#4da8da" />
+      <Label fx:id="englishLabel" layoutX="171.0" layoutY="43.0" text="Englisch:" textFill="#4da8da" />
+   </children>
+</AnchorPane>
