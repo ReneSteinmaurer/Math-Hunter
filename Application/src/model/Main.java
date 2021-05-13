@@ -13,6 +13,9 @@ import java.io.IOException;
 
 public class Main extends Application {
     private Stage stage;
+    private FXMLLoader loader;
+    private Parent root;
+    private Scene scene;
     private LoginController loginController = new LoginController();
     private RegisterController registerController = new RegisterController();
     private SelectionController selectionController = new SelectionController();
@@ -29,11 +32,11 @@ public class Main extends Application {
 
     public void loadLogin() throws IOException {
         stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
+        loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/login.fxml"));
-        Parent root = loader.load();
+        root = loader.load();
         stage.setTitle("Login");
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         loginController = loader.getController();
         loginController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
@@ -45,11 +48,11 @@ public class Main extends Application {
     public void loadApplication() throws IOException {
         stage.close();
         stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
+        loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/selectionStage.fxml"));
-        Parent root = loader.load();
+        root = loader.load();
         stage.setTitle("Selection");
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         selectionController = loader.getController();
         selectionController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
@@ -61,11 +64,11 @@ public class Main extends Application {
     public void loadRegister() throws IOException {
         stage.close();
         stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
+        loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/register.fxml"));
-        Parent root = loader.load();
+        root = loader.load();
         stage.setTitle("Register");
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         registerController = loader.getController();
         registerController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
@@ -77,11 +80,11 @@ public class Main extends Application {
 
     public void loadEnglischWindow() throws IOException {
         stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
+        loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/englischScene.fxml"));
-        Parent root = loader.load();
+        root = loader.load();
         stage.setTitle("Englisch");
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         englischController = loader.getController();
         englischController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
@@ -93,11 +96,11 @@ public class Main extends Application {
 
     public void loadGermanWindow() throws IOException {
         stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
+        loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/germanScene.fxml"));
-        Parent root = loader.load();
+        root = loader.load();
         stage.setTitle("German");
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         germanController = loader.getController();
         scene.getStylesheets().add("../view/login.css");
         stage.initStyle(StageStyle.DECORATED);
@@ -108,11 +111,11 @@ public class Main extends Application {
 
     public void loadMathWindows() throws IOException {
         stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
+        loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/mathScene.fxml"));
-        Parent root = loader.load();
+        root = loader.load();
         stage.setTitle("Math");
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         mathController = loader.getController();
         scene.getStylesheets().add("../view/login.css");
         stage.initStyle(StageStyle.DECORATED);
@@ -122,11 +125,11 @@ public class Main extends Application {
 
     public void loadAddWindow() throws IOException {
         stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
+        loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/addWindow.fxml"));
-        Parent root = loader.load();
+        root = loader.load();
         stage.setTitle("AddWindow");
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         addVocabController = loader.getController();
         addVocabController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
@@ -134,10 +137,7 @@ public class Main extends Application {
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
         stage.show();
-
     }
-
-
 
     public static void main(String[] args) {
         launch(args);
