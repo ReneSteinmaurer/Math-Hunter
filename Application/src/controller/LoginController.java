@@ -16,7 +16,7 @@ public class LoginController implements Initializable {
     private Main model;
     private DatabaseManagement dbm;
     private boolean loggedIn = false;
-    private boolean startedOnce = true;
+    private boolean firstStarted = true;
     private Statement stmt;
     private ResultSet rs;
 
@@ -34,8 +34,8 @@ public class LoginController implements Initializable {
 
     @FXML
     void login(ActionEvent event) throws SQLException, IOException {
-        if (startedOnce) {
-            startedOnce = false;
+        if (firstStarted) {
+            firstStarted = false;
             dbm = new DatabaseManagement();
         }
         loggedIn = dbm.userLogin(inputName.getText(),pwdField.getText());

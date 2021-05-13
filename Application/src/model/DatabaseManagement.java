@@ -42,7 +42,6 @@ public class DatabaseManagement {
                     rs.next();
 
                     if (rs.getInt(1) >= 1) {
-                        System.out.println("test");
                         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Dieser User ist bereits vorhanden!", ButtonType.OK);
                         alert.showAndWait();
                     } else {
