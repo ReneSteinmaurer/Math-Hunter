@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="englischPane" prefHeight="196.0" prefWidth="405.0" style="-fx-background-color: #203647;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EnglischController">
    <children>
       <Label fx:id="vocabularyLabel" layoutX="14.0" layoutY="14.0" prefHeight="48.0" prefWidth="126.0" text="Vocabolary:" textFill="#4da8da">
@@ -18,7 +17,7 @@
       <Button fx:id="nextButton" layoutX="270.0" layoutY="159.0" mnemonicParsing="false" onAction="#next" style="-fx-background-color: #68FCBC;" text="Weiter" />
       <Button fx:id="addButton" layoutX="14.0" layoutY="159.0" mnemonicParsing="false" onAction="#addVocabulary" style="-fx-background-color: #68FCBC;" text="Wort hinzufügen" />
       <TextField layoutX="-311.0" layoutY="87.0" />
-      <TextField fx:id="wordField" layoutX="14.0" layoutY="100.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: #007CC7;" />
+      <TextField fx:id="wordField" disable="true" layoutX="14.0" layoutY="100.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: #007CC7;" />
       <TextField fx:id="translationField" layoutX="212.0" layoutY="100.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: #007CC7;" />
       <Label fx:id="wordLabel" layoutX="14.0" layoutY="79.0" text="Wort:" textFill="#4da8da" />
       <Label fx:id="translationLabel" layoutX="212.0" layoutY="79.0" text="Übersetzung:" textFill="#4da8da" />

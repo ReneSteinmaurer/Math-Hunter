@@ -70,6 +70,12 @@ call addVocab('unterscheiden', 'distingouish');
 call addVocab('Abend', 'evening');
 call addVocab('aber', 'however');
 call addVocab('alles', 'everything');
+call addVocab('installieren', 'install');
+call addVocab('anwenden', 'apply');
+call addVocab('Speicher', 'memory');
+call addVocab('Gerät', 'device');
+call addVocab('Detektor', 'detector');
+call addVocab('Fälschung', 'forgery');
 
 
 

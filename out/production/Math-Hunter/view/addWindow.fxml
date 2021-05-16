@@ -16,7 +16,7 @@
       </Label>
       <TextField fx:id="germanField" layoutX="14.0" layoutY="60.0" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #007CC7;" />
       <TextField fx:id="englishField" layoutX="171.0" layoutY="60.0" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #007CC7;" />
-      <Button fx:id="addButton" layoutX="222.0" layoutY="106.0" mnemonicParsing="false" style="-fx-background-color: #68FCBC;" text="Hinzufügen" />
+      <Button fx:id="addButton" layoutX="222.0" layoutY="106.0" mnemonicParsing="false" onAction="#addWord" style="-fx-background-color: #68FCBC;" text="Hinzufügen" />
       <Label fx:id="germanLabel" layoutX="14.0" layoutY="43.0" text="Deutsch:" textFill="#4da8da" />
       <Label fx:id="englishLabel" layoutX="171.0" layoutY="43.0" text="Englisch:" textFill="#4da8da" />
    </children>

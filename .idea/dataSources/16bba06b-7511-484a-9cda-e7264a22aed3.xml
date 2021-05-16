@@ -1025,12 +1025,12 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <table id="289" parent="3" name="users"/>
     <table id="290" parent="3" name="vocabs"/>
     <routine id="291" parent="3" name="addUser">
-      <SourceTextLength>522</SourceTextLength>
+      <SourceTextLength>521</SourceTextLength>
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
     </routine>
     <routine id="292" parent="3" name="addVocab">
-      <SourceTextLength>278</SourceTextLength>
+      <SourceTextLength>280</SourceTextLength>
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
     </routine>
@@ -1096,37 +1096,42 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <ColNames>name</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="305" parent="290" name="germanVocab">
+    <column id="305" parent="290" name="id">
       <Position>1</Position>
-      <DataType>varchar(100)|0s</DataType>
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="306" parent="290" name="englischVocab">
+    <column id="306" parent="290" name="germanVocab">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <key id="307" parent="290" name="PRIMARY">
+    <column id="307" parent="290" name="englischVocab">
+      <Position>3</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <key id="308" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>germanVocab</ColNames>
+      <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <argument id="308" parent="291" name="usernameIn">
+    <argument id="309" parent="291" name="usernameIn">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
     </argument>
-    <argument id="309" parent="291" name="passwordIn">
+    <argument id="310" parent="291" name="passwordIn">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </argument>
-    <argument id="310" parent="291" name="playerNameIn">
+    <argument id="311" parent="291" name="playerNameIn">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
     </argument>
-    <argument id="311" parent="292" name="germanVocabIn">
+    <argument id="312" parent="292" name="germanVocabIn">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
     </argument>
-    <argument id="312" parent="292" name="englischVocabIn">
+    <argument id="313" parent="292" name="englischVocabIn">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </argument>

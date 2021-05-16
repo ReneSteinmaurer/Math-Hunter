@@ -3,9 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import model.DatabaseManagement;
 import model.Main;
@@ -44,22 +42,15 @@ public class AddVocabController implements Initializable {
 
     @FXML
     void addWord(ActionEvent event) throws SQLException, IOException {
-        try {
-            databaseManagement= new DatabaseManagement();
-            databaseManagement.addVocab(germanField.getText(), englishField.getText());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        if (firstStarted) {
+            firstStarted = false;
+            databaseManagement = new DatabaseManagement();
         }
-
-        try {
-            model.loadApplication();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        databaseManagement.addVocab(germanField.getText(), englishField.getText());
+        germanField.clear();
+        englishField.clear();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vocabel hinzugefügt!", ButtonType.OK);
+        alert.showAndWait();
     }
 
 

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Main extends Application {
     private Stage stage;
@@ -86,6 +87,11 @@ public class Main extends Application {
         stage.setTitle("Englisch");
         scene = new Scene(root);
         englischController = loader.getController();
+        try {
+            englischController.fillStartValue();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         englischController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
         stage.initModality(Modality.APPLICATION_MODAL);
