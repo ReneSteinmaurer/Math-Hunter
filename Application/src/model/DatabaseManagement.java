@@ -84,6 +84,15 @@ public class DatabaseManagement {
         return loggedIn;
     }
 
+    public void addVocab(String germanWord, String englishWord) throws SQLException {
+        try (PreparedStatement ps = con.prepareStatement("call addVocab (?,?)")){
+            ps.setString(1, germanWord);
+            ps.setString(2, englishWord);
+
+            ps.execute();
+        }
+    }
+
     public Connection getCon() {
         return con;
     }

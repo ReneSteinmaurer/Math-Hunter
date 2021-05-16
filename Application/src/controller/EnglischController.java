@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class EnglischController {
     private Main model;
+    private Integer points;
 
     @FXML
     private AnchorPane englischPane;
@@ -61,7 +62,8 @@ public class EnglischController {
     }
 
     @FXML
-    void quit(ActionEvent event) {
+    void quit(ActionEvent event) throws IOException {
+        model.loadApplication();
 
     }
 
