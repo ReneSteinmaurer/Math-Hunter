@@ -24,7 +24,8 @@ create table if not exists user_player
 
 create table if not exists vocabs
 (
-    germanVocab   varchar(100) not null primary key,
+    id            int(100) not null primary key auto_increment,
+    germanVocab   varchar(100),
     englischVocab varchar(100)
 );
 
@@ -65,7 +66,7 @@ call addUser('test', 'admin', 'testPlayer');
 call addUser('test2', 'admin', 'test');
 
 call addVocab('Tisch', 'desk');
-call addVocab('unterscheiden', 'distinguish');
+call addVocab('unterscheiden', 'distingouish');
 call addVocab('Abend', 'evening');
 call addVocab('aber', 'however');
 call addVocab('alles', 'everything');
