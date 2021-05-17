@@ -5,12 +5,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import model.DatabaseManagement;
 import model.Main;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class SelectionController {
     private Main model;
+    private boolean firstStarted = true;
+    private DatabaseManagement dbm;
 
 
     @FXML
@@ -35,37 +39,33 @@ public class SelectionController {
     private Button deutschButton11;
 
     @FXML
-    void startEnglischGame(ActionEvent event) {
-        try {
-            model.loadEnglischWindow();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void startEnglischGame(ActionEvent event) throws IOException {
+        model.loadEnglischWindow();
 
     }
 
     @FXML
-    void startGermanGame(ActionEvent event) {
-        try {
-            model.loadGermanWindow();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void startGermanGame(ActionEvent event) throws IOException {
+        model.loadGermanWindow();
 
     }
 
     @FXML
-    void startMathGame(ActionEvent event) {
-        try {
-            model.loadMathWindows();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void startMathGame(ActionEvent event) throws IOException {
+        model.loadMathWindows();
 
     }
 
     public void setModel(Main model) {
         this.model = model;
     }
+
+    public void setAmountOfPoints() throws SQLException, IOException {
+        if (firstStarted){
+            firstStarted=false;
+            dbm = new DatabaseManagement();
+            pointLabel.setText(dbm.getPointsFromUser());
+    }
+
 }
 

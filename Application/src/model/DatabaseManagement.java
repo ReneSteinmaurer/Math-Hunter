@@ -31,6 +31,20 @@ public class DatabaseManagement {
         }
     }
 
+    public int getPointsFromUser(String playerName) throws SQLException {
+        int points;
+        try (PreparedStatement ps = con.prepareStatement(
+                "select points from players where name = ?")) {
+            ps.setString(1,playerName);
+
+            rs = ps.executeQuery();
+            rs.next();
+            points = rs.getInt(1);
+        }
+
+        return points;
+    }
+
     public void addUser(String name, String pwd, String playerName) throws SQLException {
         if (!name.isEmpty() && !pwd.isEmpty() && !playerName.isEmpty()) {
             try (PreparedStatement ps2 = con.prepareStatement(

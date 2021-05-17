@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="text-field" prefHeight="228.0" prefWidth="303.0" style="-fx-background-color: #203647;" stylesheets="@login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
+<AnchorPane id="text-field" prefHeight="287.0" prefWidth="304.0" style="-fx-background-color: #203647;" stylesheets="@login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
    <children>
       <Label layoutX="107.0" layoutY="7.0" text="Register" textFill="#4da8da">
          <font>
@@ -22,13 +22,19 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="16.0" layoutY="145.0" text="Nick-Name: " textFill="#4da8da">
+      <Label layoutX="17.0" layoutY="191.0" text="Nick-Name: " textFill="#4da8da">
          <font>
             <Font size="14.0" />
          </font></Label>
       <TextField fx:id="usernameField" layoutX="107.0" layoutY="67.0" style="-fx-background-color: #007CC7; -fx-border-color: #203647;" stylesheets="@login.css" />
       <PasswordField fx:id="pwdField" layoutX="107.0" layoutY="106.0" style="-fx-background-color: #007CC7; -fx-border-color: #203647;" />
-      <TextField fx:id="nicknameField" layoutX="107.0" layoutY="142.0" style="-fx-background-color: #007CC7; -fx-border-color: #203647;" />
-      <Button fx:id="buttonRegister" layoutX="229.0" layoutY="189.0" mnemonicParsing="false" onAction="#register" style="-fx-background-color: #68FCBC;" text="Register" />
+      <PasswordField fx:id="pwdField2" layoutX="107.0" layoutY="147.0" style="-fx-background-color: #007CC7; -fx-border-color: #203647;" />
+      <TextField fx:id="nicknameField" layoutX="107.0" layoutY="187.0" style="-fx-background-color: #007CC7; -fx-border-color: #203647;" />
+      <Button fx:id="buttonRegister" layoutX="230.0" layoutY="239.0" mnemonicParsing="false" onAction="#register" style="-fx-background-color: #68FCBC;" text="Register" />
+      <Label layoutX="16.0" layoutY="151.0" text="Password: " textFill="#4da8da">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

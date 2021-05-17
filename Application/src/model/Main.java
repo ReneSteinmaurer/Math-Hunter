@@ -32,6 +32,7 @@ public class Main extends Application {
     }
 
     public void loadLogin() throws IOException {
+        stage.close();
         stage = new Stage();
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/login.fxml"));

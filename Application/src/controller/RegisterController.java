@@ -2,9 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.DatabaseManagement;
 import model.Main;
 
@@ -18,6 +16,7 @@ public class RegisterController {
 
     @FXML private TextField usernameField;
     @FXML private PasswordField pwdField;
+    @FXML private PasswordField pwdField2;
     @FXML private TextField nicknameField;
     @FXML private Button buttonRegister;
 
@@ -27,7 +26,14 @@ public class RegisterController {
             startedOnce = false;
             dbm = new DatabaseManagement();
         }
-        dbm.addUser(usernameField.getText(),pwdField.getText(),nicknameField.getText());
+        if (pwdField.getText().equals(pwdField2.getText())) {
+            dbm.addUser(usernameField.getText(),pwdField.getText(),nicknameField.getText());
+            model.loadLogin();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Passwörter müssen überein stimmen!", ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 
     public void setModel(Main main) {
