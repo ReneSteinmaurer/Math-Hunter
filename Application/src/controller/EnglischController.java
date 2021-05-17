@@ -14,8 +14,10 @@ import javafx.scene.layout.AnchorPane;
 import model.Main;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class EnglischController {
+public class EnglischController implements Initializable{
     private Main model;
     private Integer points;
 

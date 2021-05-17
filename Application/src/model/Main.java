@@ -23,6 +23,7 @@ public class Main extends Application {
     private MathController mathController= new MathController();
     private GermanController germanController = new GermanController();
     private EnglischController englischController = new EnglischController();
+    GameOverController gameOverController= new GameOverController();
     AddVocabController addVocabController= new AddVocabController();
 
     @Override
