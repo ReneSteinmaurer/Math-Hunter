@@ -85,6 +85,12 @@ public class EnglischController implements Initializable{
             dbm = new DatabaseManagement();
             vocabMap= dbm.readVocabTable();
         }
+        for (User value : userMap.values()) {
+            if (value.isLoggedIn()) {
+                nickname = value.getNickname();
+                points.setValue(dbm.getPointsFromUser(value.getNickname()));
+            }
+        }
         random = r.nextInt(vocabMap.size());
         wordField.setText(String.valueOf(vocabMap.get(random).getGermanWord()));
     }

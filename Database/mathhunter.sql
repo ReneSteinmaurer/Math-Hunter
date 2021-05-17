@@ -55,7 +55,7 @@ begin
     select name from users where name = usernameIn into userNamevar;
     if (userNamevar is null) then
         insert into users (name, password) values (usernameIn, passwordIn);
-        insert into players (name, points) values (playerNameIn, 0);
+        insert into players (name, points) values (playerNameIn, 10);
         select id from players where playerNameIn = name into playerIDVar;
         insert into user_player (playerID, userName, playerName) values (playerID, usernameIn, playerNameIn);
     end if;

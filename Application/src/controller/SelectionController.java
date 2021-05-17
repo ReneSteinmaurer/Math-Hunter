@@ -7,15 +7,18 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import model.DatabaseManagement;
 import model.Main;
+import model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class SelectionController {
     private Main model;
     private boolean firstStarted = true;
+    private int points;
     private DatabaseManagement dbm;
-
+    private HashMap<String, User> userMap = new HashMap<>();
 
     @FXML
     private AnchorPane selectionPane;
@@ -60,11 +63,21 @@ public class SelectionController {
         this.model = model;
     }
 
-    public void setAmountOfPoints(String playername) throws SQLException, IOException {
+    public void setUserMap(HashMap<String, User> userMap) throws SQLException, IOException {
+        this.userMap = userMap;
+    }
+
+    public void setAmountOfPoints() throws SQLException, IOException {
         if (firstStarted) {
             firstStarted = false;
             dbm = new DatabaseManagement();
-            pointLabel.setText(String.valueOf(dbm.getPointsFromUser(playername)));
+        }
+        for (User value : userMap.values()) {
+            if (value.isLoggedIn()) {
+                points = (dbm.getPointsFromUser(value.getNickname()));
+                if (points < 10) dbm.setPointsFromUser(value.getNickname(),10);
+                else amountOfPoints.setText(String.valueOf(points));
+            }
         }
     }
 }

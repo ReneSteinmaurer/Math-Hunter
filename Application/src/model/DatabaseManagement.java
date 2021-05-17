@@ -45,6 +45,29 @@ public class DatabaseManagement {
         return points;
     }
 
+    public void setPointsFromUser(String playerName, int points) throws SQLException {
+        try (PreparedStatement ps = con.prepareStatement(
+                "update players set points = ? where name = ?")) {
+            ps.setInt(1,points);
+            ps.setString(2,playerName);
+
+            ps.execute();
+        }
+    }
+
+    public HashMap<String, User> getAllUsers() throws SQLException {
+        HashMap<String, User> userMap = new HashMap<>();
+        try (PreparedStatement ps = con.prepareStatement(
+                "select * from user_player")){
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                userMap.put(rs.getString(2), new User(rs.getString(3),false,10));
+            }
+        }
+        return userMap;
+    }
+
     public void addUser(String name, String pwd, String playerName) throws SQLException {
         if (!name.isEmpty() && !pwd.isEmpty() && !playerName.isEmpty()) {
             try (PreparedStatement ps2 = con.prepareStatement(

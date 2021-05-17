@@ -6,10 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import model.DatabaseManagement;
 import model.Main;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -17,6 +19,7 @@ public class LoginController implements Initializable {
     private DatabaseManagement dbm;
     private boolean loggedIn = false;
     private boolean firstStarted = true;
+    private HashMap<String, User> userMap;
     private Statement stmt;
     private ResultSet rs;
 
@@ -39,7 +42,10 @@ public class LoginController implements Initializable {
             dbm = new DatabaseManagement();
         }
         loggedIn = dbm.userLogin(inputName.getText(),pwdField.getText());
-        if (loggedIn) model.loadApplication();
+        if (loggedIn) {
+            userMap.get(inputName.getText()).setLoggedIn(true);
+            model.loadApplication();
+        }
         else {
             inputName.clear();
             pwdField.clear();
@@ -49,10 +55,13 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         buttonLogin.disableProperty().bind(inputName.textProperty().isEmpty().or(pwdField.textProperty().isEmpty()));
-
     }
 
     public void setModel(Main main) {
         model = main;
+    }
+
+    public void setUserMap(HashMap<String, User> userMap) throws SQLException, IOException {
+        this.userMap = userMap;
     }
 }

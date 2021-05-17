@@ -1020,118 +1020,139 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <user id="286" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="287" parent="3" name="players"/>
-    <table id="288" parent="3" name="user_player"/>
-    <table id="289" parent="3" name="users"/>
-    <table id="290" parent="3" name="vocabs"/>
-    <routine id="291" parent="3" name="addUser">
-      <SourceTextLength>521</SourceTextLength>
+    <table id="287" parent="3" name="calculations"/>
+    <table id="288" parent="3" name="players"/>
+    <table id="289" parent="3" name="user_player"/>
+    <table id="290" parent="3" name="users"/>
+    <table id="291" parent="3" name="vocabs"/>
+    <routine id="292" parent="3" name="addUser">
+      <SourceTextLength>522</SourceTextLength>
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
     </routine>
-    <routine id="292" parent="3" name="addVocab">
+    <routine id="293" parent="3" name="addVocab">
       <SourceTextLength>280</SourceTextLength>
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
     </routine>
-    <column id="293" parent="287" name="id">
+    <column id="294" parent="287" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="294" parent="287" name="name">
+    <column id="295" parent="287" name="calculation">
       <Position>2</Position>
-      <DataType>varchar(45)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="295" parent="287" name="points">
+    <column id="296" parent="287" name="result">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="296" parent="287" name="PRIMARY">
+    <key id="297" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="297" parent="288" name="playerID">
+    <column id="298" parent="288" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="298" parent="288" name="userName">
+    <column id="299" parent="288" name="name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="300" parent="288" name="points">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="301" parent="288" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="302" parent="289" name="playerID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="303" parent="289" name="userName">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="299" parent="288" name="playerName">
+    <column id="304" parent="289" name="playerName">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="300" parent="288" name="PRIMARY">
+    <key id="305" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>playerID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="301" parent="288" name="players">
+    <foreign-key id="306" parent="289" name="players">
       <ColNames>playerID</ColNames>
       <RefTableName>players</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="302" parent="289" name="name">
+    <column id="307" parent="290" name="name">
       <Position>1</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="303" parent="289" name="password">
+    <column id="308" parent="290" name="password">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="304" parent="289" name="PRIMARY">
+    <key id="309" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="305" parent="290" name="id">
+    <column id="310" parent="291" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="306" parent="290" name="germanVocab">
+    <column id="311" parent="291" name="germanVocab">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="307" parent="290" name="englischVocab">
+    <column id="312" parent="291" name="englischVocab">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <key id="308" parent="290" name="PRIMARY">
+    <key id="313" parent="291" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <argument id="309" parent="291" name="usernameIn">
+    <argument id="314" parent="292" name="usernameIn">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
     </argument>
-    <argument id="310" parent="291" name="passwordIn">
+    <argument id="315" parent="292" name="passwordIn">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </argument>
-    <argument id="311" parent="291" name="playerNameIn">
+    <argument id="316" parent="292" name="playerNameIn">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
     </argument>
-    <argument id="312" parent="292" name="germanVocabIn">
+    <argument id="317" parent="293" name="germanVocabIn">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
     </argument>
-    <argument id="313" parent="292" name="englischVocabIn">
+    <argument id="318" parent="293" name="englischVocabIn">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </argument>

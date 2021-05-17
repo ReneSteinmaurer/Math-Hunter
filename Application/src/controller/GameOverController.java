@@ -24,8 +24,6 @@ public class GameOverController {
     @FXML
     void backToMainMenu(ActionEvent event) throws IOException {
         model.loadApplication();
-
-
     }
 
 
