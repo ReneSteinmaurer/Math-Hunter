@@ -60,12 +60,12 @@ public class SelectionController {
         this.model = model;
     }
 
-    public void setAmountOfPoints() throws SQLException, IOException {
-        if (firstStarted){
-            firstStarted=false;
+    public void setAmountOfPoints(String playername) throws SQLException, IOException {
+        if (firstStarted) {
+            firstStarted = false;
             dbm = new DatabaseManagement();
-            pointLabel.setText(dbm.getPointsFromUser());
+            pointLabel.setText(String.valueOf(dbm.getPointsFromUser(playername)));
+        }
     }
-
 }
 
