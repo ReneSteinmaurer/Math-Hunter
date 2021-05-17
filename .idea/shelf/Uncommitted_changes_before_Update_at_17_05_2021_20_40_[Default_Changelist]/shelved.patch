@@ -1,0 +1,28 @@
+Index: Application/src/controller/SelectionController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport model.DatabaseManagement;\r\nimport model.Main;\r\n\r\nimport java.io.IOException;\r\nimport java.sql.SQLException;\r\n\r\npublic class SelectionController {\r\n    private Main model;\r\n    private boolean firstStarted = true;\r\n    private DatabaseManagement dbm;\r\n\r\n\r\n    @FXML\r\n    private AnchorPane selectionPane;\r\n\r\n    @FXML\r\n    private Label selectionLabel;\r\n\r\n    @FXML\r\n    private Label pointLabel;\r\n\r\n    @FXML\r\n    private Label amountOfPoints;\r\n\r\n    @FXML\r\n    private Button deutschButton;\r\n\r\n    @FXML\r\n    private Button deutschButton1;\r\n\r\n    @FXML\r\n    private Button deutschButton11;\r\n\r\n    @FXML\r\n    void startEnglischGame(ActionEvent event) throws IOException {\r\n        model.loadEnglischWindow();\r\n\r\n    }\r\n\r\n    @FXML\r\n    void startGermanGame(ActionEvent event) throws IOException {\r\n        model.loadGermanWindow();\r\n\r\n    }\r\n\r\n    @FXML\r\n    void startMathGame(ActionEvent event) throws IOException {\r\n        model.loadMathWindows();\r\n\r\n    }\r\n\r\n    public void setModel(Main model) {\r\n        this.model = model;\r\n    }\r\n\r\n    public void setAmountOfPoints() throws SQLException, IOException {\r\n        if (firstStarted){\r\n            firstStarted=false;\r\n            dbm = new DatabaseManagement();\r\n            pointLabel.setText(dbm.getPointsFromUser());\r\n    }\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Application/src/controller/SelectionController.java b/Application/src/controller/SelectionController.java
+--- a/Application/src/controller/SelectionController.java	(revision 5423fe9dbf2193fd545d68e7dd936091f1a743e0)
++++ b/Application/src/controller/SelectionController.java	(date 1621276733695)
+@@ -60,12 +60,12 @@
+         this.model = model;
+     }
+ 
+-    public void setAmountOfPoints() throws SQLException, IOException {
+-        if (firstStarted){
+-            firstStarted=false;
++    public void setAmountOfPoints(String playername) throws SQLException, IOException {
++        if (firstStarted) {
++            firstStarted = false;
+             dbm = new DatabaseManagement();
+-            pointLabel.setText(dbm.getPointsFromUser());
++            pointLabel.setText(String.valueOf(dbm.getPointsFromUser(playername)));
++        }
+     }
+-
+ }
+ 

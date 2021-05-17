@@ -1,0 +1,112 @@
+Index: Application/src/controller/AddVocabController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.scene.control.*;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport model.DatabaseManagement;\r\nimport model.Main;\r\n\r\nimport java.io.IOException;\r\nimport java.net.URL;\r\nimport java.sql.SQLException;\r\nimport java.sql.Statement;\r\nimport java.util.ResourceBundle;\r\n\r\npublic class AddVocabController implements Initializable {\r\n    private Main model;\r\n    private DatabaseManagement databaseManagement;\r\n\r\n    @FXML\r\n    private AnchorPane pane;\r\n\r\n    @FXML\r\n    private Label addLabel;\r\n\r\n    @FXML\r\n    private TextField germanField;\r\n\r\n    @FXML\r\n    private TextField englishField;\r\n\r\n    @FXML\r\n    private Button addButton;\r\n\r\n    @FXML\r\n    private Label germanLabel;\r\n\r\n    @FXML\r\n    private Label englishLabel;\r\n\r\n\r\n    @FXML\r\n    void addWord(ActionEvent event) throws SQLException, IOException {\r\n        if (firstStarted) {\r\n            firstStarted = false;\r\n            databaseManagement = new DatabaseManagement();\r\n        }\r\n        databaseManagement.addVocab(germanField.getText(), englishField.getText());\r\n        germanField.clear();\r\n        englishField.clear();\r\n        Alert alert = new Alert(Alert.AlertType.INFORMATION,\"Vocabel hinzugefügt!\", ButtonType.OK);\r\n        alert.showAndWait();\r\n    }\r\n\r\n\r\n    public void setModel(Main model) {\r\n        this.model = model;\r\n    }\r\n\r\n    @Override\r\n    public void initialize(URL location, ResourceBundle resources) {\r\n        addButton.disableProperty().bind(germanField.textProperty().isEmpty().or(englishField.textProperty().isEmpty()));\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Application/src/controller/AddVocabController.java b/Application/src/controller/AddVocabController.java
+--- a/Application/src/controller/AddVocabController.java	(revision 5423fe9dbf2193fd545d68e7dd936091f1a743e0)
++++ b/Application/src/controller/AddVocabController.java	(date 1621184504575)
+@@ -17,6 +17,7 @@
+ public class AddVocabController implements Initializable {
+     private Main model;
+     private DatabaseManagement databaseManagement;
++    private boolean firstStarted = true;
+ 
+     @FXML
+     private AnchorPane pane;
+Index: Application/src/model/DatabaseManagement.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport javafx.scene.control.Alert;\r\nimport javafx.scene.control.ButtonType;\r\n\r\nimport java.io.FileInputStream;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.IOException;\r\nimport java.sql.*;\r\nimport java.util.Properties;\r\n\r\npublic class DatabaseManagement {\r\n    private Connection con;\r\n    private ResultSet rs;\r\n    private Statement stmt;\r\n\r\n    public DatabaseManagement() throws IOException, SQLException {\r\n        Properties prop = new Properties();\r\n        String url;\r\n        String name;\r\n        String pwd;\r\n\r\n        try (FileInputStream in = new FileInputStream(\"Application/dbconnect.properties\")) {\r\n            prop.load(in);\r\n            url = prop.getProperty(\"url\");\r\n            name = prop.getProperty(\"name\");\r\n            pwd = prop.getProperty(\"password\");\r\n            con = DriverManager.getConnection(url, name, pwd);\r\n            stmt = con.createStatement();\r\n            System.out.println(\"Connected to db...\");\r\n        }\r\n    }\r\n\r\n    public int getPointsFromUser(String playerName) throws SQLException {\r\n        int points;\r\n        try (PreparedStatement ps = con.prepareStatement(\r\n                \"select points from players where name = ?\")) {\r\n            ps.setString(1,playerName);\r\n\r\n            rs = ps.executeQuery();\r\n            rs.next();\r\n            points = rs.getInt(1);\r\n        }\r\n\r\n        return points;\r\n    }\r\n\r\n    public void addUser(String name, String pwd, String playerName) throws SQLException {\r\n        if (!name.isEmpty() && !pwd.isEmpty() && !playerName.isEmpty()) {\r\n            try (PreparedStatement ps2 = con.prepareStatement(\r\n                    \"call addUser(?,?,?)\")) {\r\n                try (PreparedStatement ps = con.prepareStatement(\r\n                        \"select count(*) from users where name = ?\")) {\r\n                    ps.setString(1, name);\r\n                    rs = ps.executeQuery();\r\n                    rs.next();\r\n\r\n                    if (rs.getInt(1) >= 1) {\r\n                        Alert alert = new Alert(Alert.AlertType.INFORMATION, \"Dieser User ist bereits vorhanden!\", ButtonType.OK);\r\n                        alert.showAndWait();\r\n                    } else {\r\n                        ps2.setString(1, name);\r\n                        ps2.setString(2, pwd);\r\n                        ps2.setString(3, playerName);\r\n                        ps2.executeQuery();\r\n                        Alert alert = new Alert(Alert.AlertType.INFORMATION, \"User hinzugefügt!\", ButtonType.OK);\r\n                        alert.showAndWait();\r\n                    }\r\n                }\r\n            }\r\n        } else {\r\n            Alert alert = new Alert(Alert.AlertType.INFORMATION, \"Bitte alle Felder ausfüllen!\", ButtonType.OK);\r\n            alert.showAndWait();\r\n        }\r\n    }\r\n\r\n    public boolean userLogin(String name, String pwd) throws SQLException {\r\n        boolean loggedIn = false;\r\n        try (PreparedStatement ps = con.prepareStatement(\r\n                \"select * from users where name = ?\")) {\r\n\r\n            ps.setString(1, name);\r\n            rs = ps.executeQuery();\r\n\r\n            if (rs.next()) {\r\n                System.out.printf(\"%s, %s \\n\",\r\n                        rs.getString(1),\r\n                        rs.getString(2));\r\n                if (pwd.equals(rs.getString(2))) {\r\n                    loggedIn = true;\r\n                    System.out.println(\"eingeloggt!\");\r\n                }\r\n            } else {\r\n                Alert alert = new Alert(Alert.AlertType.WARNING, \"Username oder Passwort stimmen nicht überein!\", ButtonType.OK);\r\n                alert.showAndWait();\r\n            }\r\n        }\r\n        return loggedIn;\r\n    }\r\n\r\n    public void addVocab(String germanWord, String englishWord) throws SQLException {\r\n        try (PreparedStatement ps = con.prepareStatement(\"call addVocab (?,?)\")){\r\n            ps.setString(1, germanWord);\r\n            ps.setString(2, englishWord);\r\n\r\n            ps.execute();\r\n        }\r\n    }\r\n\r\n    public HashMap<Integer, Vocabulary> readVocabTable(){\r\n        int rowCount = 0;\r\n        HashMap<Integer, Vocabulary> vocabMap = new HashMap<>();\r\n        try(PreparedStatement preparedStatement=con.prepareStatement(\"Select * from vocabs\")){\r\n            rs=preparedStatement.executeQuery();\r\n\r\n            while (rs.next()){\r\n                Vocabulary vocabulary= new Vocabulary(String.valueOf(rs.getString(\"germanVocab\")), String.valueOf(rs.getString(\"englischVocab\")));\r\n                vocabMap.put(rowCount, vocabulary);\r\n                rowCount++;\r\n            }\r\n\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n        }\r\n\r\n        return vocabMap;\r\n    }\r\n\r\n\r\n    public Connection getCon() {\r\n        return con;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Application/src/model/DatabaseManagement.java b/Application/src/model/DatabaseManagement.java
+--- a/Application/src/model/DatabaseManagement.java	(revision 5423fe9dbf2193fd545d68e7dd936091f1a743e0)
++++ b/Application/src/model/DatabaseManagement.java	(date 1621276337783)
+@@ -4,9 +4,9 @@
+ import javafx.scene.control.ButtonType;
+ 
+ import java.io.FileInputStream;
+-import java.io.FileNotFoundException;
+ import java.io.IOException;
+ import java.sql.*;
++import java.util.HashMap;
+ import java.util.Properties;
+ 
+ public class DatabaseManagement {
+Index: Application/src/controller/EnglischController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport javafx.beans.binding.Bindings;\r\nimport javafx.beans.property.IntegerProperty;\r\nimport javafx.beans.property.SimpleIntegerProperty;\r\nimport javafx.beans.property.SimpleStringProperty;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.control.TextField;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport model.Main;\r\n\r\nimport java.io.IOException;\r\n\r\npublic class EnglischController {\r\n    private Main model;\r\n    private Integer points;\r\n\r\n    @FXML\r\n    private AnchorPane englischPane;\r\n\r\n    @FXML\r\n    private Label vocabularyLabel;\r\n\r\n    @FXML\r\n    private Button quitButton;\r\n\r\n    @FXML\r\n    private Button nextButton;\r\n\r\n    @FXML\r\n    private Button addButton;\r\n\r\n    @FXML\r\n    private TextField wordField;\r\n\r\n    @FXML\r\n    private TextField translationField;\r\n\r\n    @FXML\r\n    private Label wordLabel;\r\n\r\n    @FXML\r\n    private Label translationLabel;\r\n\r\n    @FXML\r\n    private TextField pointField;\r\n\r\n    @FXML\r\n    private Label pointLabel;\r\n\r\n    public void setModel(Main model) {\r\n        this.model = model;\r\n    }\r\n\r\n    @FXML\r\n    void addVocabulary(ActionEvent event) throws IOException {\r\n        model.loadAddWindow();\r\n    }\r\n\r\n    @FXML\r\n    void next(ActionEvent event) {\r\n\r\n    }\r\n\r\n    @FXML\r\n    void quit(ActionEvent event) throws IOException {\r\n        model.loadApplication();\r\n    }\r\n\r\n    @Override\r\n    public void initialize(URL location, ResourceBundle resources) {\r\n        nextButton.disableProperty().bind(translationField.textProperty().isEmpty());\r\n        pointField.textProperty().bind(points.asString());\r\n    }\r\n\r\n    public void fillStartValue() throws SQLException, IOException {\r\n        if (firstStarted){\r\n            firstStarted=false;\r\n            dbm = new DatabaseManagement();\r\n            vocabMap= dbm.readVocabTable();\r\n        }\r\n        random = r.nextInt(vocabMap.size());\r\n        wordField.setText(String.valueOf(vocabMap.get(random).getGermanWord()));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Application/src/controller/EnglischController.java b/Application/src/controller/EnglischController.java
+--- a/Application/src/controller/EnglischController.java	(revision 5423fe9dbf2193fd545d68e7dd936091f1a743e0)
++++ b/Application/src/controller/EnglischController.java	(date 1621275972021)
+@@ -11,13 +11,25 @@
+ import javafx.scene.control.Label;
+ import javafx.scene.control.TextField;
+ import javafx.scene.layout.AnchorPane;
++import model.DatabaseManagement;
+ import model.Main;
++import model.Vocabulary;
+ 
+ import java.io.IOException;
++import java.net.URL;
++import java.sql.SQLException;
++import java.util.HashMap;
++import java.util.Random;
++import java.util.ResourceBundle;
+ 
+-public class EnglischController {
++public class EnglischController implements Initializable {
+     private Main model;
+-    private Integer points;
++    private IntegerProperty points = new SimpleIntegerProperty();
++    private int random;
++    private HashMap<Integer, Vocabulary> vocabMap;
++    private DatabaseManagement dbm;
++    private Random r = new Random();
++    private boolean firstStarted = true;
+ 
+     @FXML
+     private AnchorPane englischPane;
+@@ -59,11 +71,27 @@
+     @FXML
+     void addVocabulary(ActionEvent event) throws IOException {
+         model.loadAddWindow();
++        firstStarted=true;
+     }
+ 
+     @FXML
+-    void next(ActionEvent event) {
++    void next(ActionEvent event) throws SQLException, IOException {
++        System.out.println(random);
++        if (vocabMap.get(random).getEnglishWord().equals(translationField.getText())) {
++            // TODO: neue Vokabeln werden noch nicht vom Programm verwendet!
++            fillStartValue();
++            translationField.clear();
++            points.setValue(points.getValue()+1);
++            System.out.println("Korrekt!");
++        } else {
++            translationField.clear();
++            if (points.getValue() != 0){
++                points.setValue(points.getValue()-1);
++            }
++            else {
+ 
++            }
++        }
+     }
+ 
+     @FXML
+@@ -86,4 +114,5 @@
+         random = r.nextInt(vocabMap.size());
+         wordField.setText(String.valueOf(vocabMap.get(random).getGermanWord()));
+     }
++
+ }
