@@ -29,6 +29,12 @@ create table if not exists vocabs
     englischVocab varchar(100)
 );
 
+create table if not exists calculations(
+    id int (100) not null primary key auto_increment,
+    calculation varchar(100),
+    result int(100) not null
+);
+
 DELIMITER $$
 
 create procedure addVocab(
@@ -76,6 +82,12 @@ call addVocab('Speicher', 'memory');
 call addVocab('Gerät', 'device');
 call addVocab('Detektor', 'detector');
 call addVocab('Fälschung', 'forgery');
+
+insert into calculations (calculation, result) VALUES ('25+17', 42);
+insert into calculations (calculation, result) VALUES ('42+100', 142);
+insert into calculations (calculation, result) VALUES ('9*8', 72);
+insert into calculations (calculation, result) VALUES ('54/6', 9);
+insert into calculations (calculation, result) VALUES ('70-33', 37);
 
 
 

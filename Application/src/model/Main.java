@@ -180,9 +180,30 @@ public class Main extends Application {
         stage.show();
     }
 
+    public void loadGameOverWindow(){
+        try {
+            stage.close();
+            stage = new Stage();
+            loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../view/gameOver.fxml"));
+            root = loader.load();
+            stage.setTitle("Game Over!");
+            scene = new Scene(root);
+            gameOverController = loader.getController();
+            gameOverController.setModel(this);
+            scene.getStylesheets().add("../view/login.css");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }

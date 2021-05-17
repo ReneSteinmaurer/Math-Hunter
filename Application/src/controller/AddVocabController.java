@@ -15,7 +15,8 @@ import java.util.ResourceBundle;
 
 public class AddVocabController implements Initializable {
     private Main model;
-    private DatabaseManagement databaseManagement;
+    private DatabaseManagement dbm;
+    private boolean firstStarted = true;
 
     @FXML
     private AnchorPane pane;

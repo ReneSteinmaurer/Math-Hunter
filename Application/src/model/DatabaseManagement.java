@@ -4,9 +4,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class DatabaseManagement {
@@ -148,6 +149,27 @@ public class DatabaseManagement {
 
         return vocabMap;
     }
+
+    public HashMap<Integer, Calculations> readCalcTable(){
+        int rows = 0;
+        HashMap<Integer, Calculations> calcMap = new HashMap<>();
+        try(PreparedStatement preparedStatement=con.prepareStatement("Select * from calculations")){
+            rs=preparedStatement.executeQuery();
+
+            while (rs.next()){
+                Calculations calculation= new Calculations(String.valueOf(rs.getString("calculation")), rs.getInt("result"));
+                calcMap.put(rows, calculation);
+                rows++;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return calcMap;
+
+    }
+
 
 
     public Connection getCon() {

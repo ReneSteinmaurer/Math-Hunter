@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -11,15 +12,27 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.DatabaseManagement;
 import model.Main;
+import model.User;
+import model.Vocabulary;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Random;
 import java.util.ResourceBundle;
 
-public class EnglischController implements Initializable{
+public class EnglischController implements Initializable {
     private Main model;
-    private Integer points;
+    private IntegerProperty points = new SimpleIntegerProperty();
+    private int random;
+    private HashMap<Integer, Vocabulary> vocabMap;
+    private HashMap<String, User> userMap = new HashMap<>();
+    private DatabaseManagement dbm;
+    private String nickname;
+    private Random r = new Random();
 
     @FXML
     private AnchorPane englischPane;
@@ -64,8 +77,24 @@ public class EnglischController implements Initializable{
     }
 
     @FXML
-    void next(ActionEvent event) {
-
+    void next(ActionEvent event) throws SQLException, IOException {
+        System.out.println(random);
+        if (vocabMap.get(random).getEnglishWord().equals(translationField.getText())) {
+            // TODO: neue Vokabeln werden noch nicht vom Programm verwendet!
+            fillStartValue();
+            translationField.clear();
+            points.setValue(points.getValue()+1);
+            System.out.println("Korrekt!");
+        } else {
+            translationField.clear();
+            if (points.getValue() >=2){
+                points.setValue(points.getValue()-1);
+            }
+            else {
+                model.loadGameOverWindow();
+            }
+        }
+        dbm.setPointsFromUser(nickname,points.getValue());
     }
 
     @FXML
@@ -89,5 +118,13 @@ public class EnglischController implements Initializable{
         }
         random = r.nextInt(vocabMap.size());
         wordField.setText(String.valueOf(vocabMap.get(random).getGermanWord()));
+    }
+
+    public void setUserMap(HashMap<String, User> userMap) throws SQLException, IOException {
+        this.userMap = userMap;
+    }
+
+    public void setDbm(DatabaseManagement dbm) {
+        this.dbm = dbm;
     }
 }
