@@ -12,7 +12,6 @@ import java.sql.SQLException;
 public class RegisterController {
     private Main model;
     private DatabaseManagement dbm;
-    private boolean startedOnce = true;
 
     @FXML private TextField usernameField;
     @FXML private PasswordField pwdField;
@@ -22,10 +21,6 @@ public class RegisterController {
 
     @FXML
     void register(ActionEvent event) throws SQLException, IOException {
-        if (startedOnce) {
-            startedOnce = false;
-            dbm = new DatabaseManagement();
-        }
         if (pwdField.getText().equals(pwdField2.getText())) {
             dbm.addUser(usernameField.getText(),pwdField.getText(),nicknameField.getText());
             model.loadLogin();
@@ -38,5 +33,9 @@ public class RegisterController {
 
     public void setModel(Main main) {
         model = main;
+    }
+
+    public void setDbm(DatabaseManagement dbm) {
+        this.dbm = dbm;
     }
 }

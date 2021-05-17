@@ -80,11 +80,7 @@ public class EnglischController implements Initializable{
     }
 
     public void fillStartValue() throws SQLException, IOException {
-        if (firstStarted){
-            firstStarted=false;
-            dbm = new DatabaseManagement();
-            vocabMap= dbm.readVocabTable();
-        }
+        vocabMap = dbm.readVocabTable();
         for (User value : userMap.values()) {
             if (value.isLoggedIn()) {
                 nickname = value.getNickname();

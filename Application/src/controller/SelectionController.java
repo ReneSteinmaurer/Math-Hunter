@@ -15,7 +15,6 @@ import java.util.HashMap;
 
 public class SelectionController {
     private Main model;
-    private boolean firstStarted = true;
     private int points;
     private DatabaseManagement dbm;
     private HashMap<String, User> userMap = new HashMap<>();
@@ -68,10 +67,6 @@ public class SelectionController {
     }
 
     public void setAmountOfPoints() throws SQLException, IOException {
-        if (firstStarted) {
-            firstStarted = false;
-            dbm = new DatabaseManagement();
-        }
         for (User value : userMap.values()) {
             if (value.isLoggedIn()) {
                 points = (dbm.getPointsFromUser(value.getNickname()));
@@ -79,6 +74,10 @@ public class SelectionController {
                 else amountOfPoints.setText(String.valueOf(points));
             }
         }
+    }
+
+    public void setDbm(DatabaseManagement dbm) throws SQLException, IOException {
+        this.dbm = dbm;
     }
 }
 

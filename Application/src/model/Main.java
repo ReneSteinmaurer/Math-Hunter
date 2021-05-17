@@ -51,6 +51,7 @@ public class Main extends Application {
             scene = new Scene(root);
             loginController = loader.getController();
             loginController.setModel(this);
+            loginController.setDbm(dbm);
             loginController.setUserMap(userMap);
             scene.getStylesheets().add("../view/login.css");
             stage.initStyle(StageStyle.DECORATED);
@@ -72,6 +73,7 @@ public class Main extends Application {
             scene = new Scene(root);
             selectionController = loader.getController();
             selectionController.setModel(this);
+            selectionController.setDbm(dbm);
             selectionController.setUserMap(userMap);
             selectionController.setAmountOfPoints();
             scene.getStylesheets().add("../view/login.css");
@@ -94,6 +96,7 @@ public class Main extends Application {
             scene = new Scene(root);
             registerController = loader.getController();
             registerController.setModel(this);
+            registerController.setDbm(dbm);
             userMap = dbm.getAllUsers();
             scene.getStylesheets().add("../view/login.css");
             stage.initStyle(StageStyle.DECORATED);
@@ -115,6 +118,7 @@ public class Main extends Application {
             stage.setTitle("Englisch");
             scene = new Scene(root);
             englischController = loader.getController();
+            englischController.setDbm(dbm);
             englischController.setUserMap(userMap);
             englischController.fillStartValue();
             englischController.setModel(this);
@@ -160,7 +164,6 @@ public class Main extends Application {
     }
 
     public void loadAddWindow() throws IOException {
-        stage.close();
         stage = new Stage();
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/addWindow.fxml"));
@@ -169,6 +172,7 @@ public class Main extends Application {
         scene = new Scene(root);
         addVocabController = loader.getController();
         addVocabController.setModel(this);
+        addVocabController.setDbm(dbm);
         scene.getStylesheets().add("../view/login.css");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);

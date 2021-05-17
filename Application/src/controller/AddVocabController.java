@@ -11,7 +11,6 @@ import model.Main;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class AddVocabController implements Initializable {
@@ -42,11 +41,7 @@ public class AddVocabController implements Initializable {
 
     @FXML
     void addWord(ActionEvent event) throws SQLException, IOException {
-        if (firstStarted) {
-            firstStarted = false;
-            databaseManagement = new DatabaseManagement();
-        }
-        databaseManagement.addVocab(germanField.getText(), englishField.getText());
+        dbm.addVocab(germanField.getText(), englishField.getText());
         germanField.clear();
         englishField.clear();
         Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vocabel hinzugefügt!", ButtonType.OK);
@@ -62,5 +57,9 @@ public class AddVocabController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         addButton.disableProperty().bind(germanField.textProperty().isEmpty().or(englishField.textProperty().isEmpty()));
 
+    }
+
+    public void setDbm(DatabaseManagement dbm) {
+        this.dbm = dbm;
     }
 }

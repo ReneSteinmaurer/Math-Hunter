@@ -18,7 +18,6 @@ public class LoginController implements Initializable {
     private Main model;
     private DatabaseManagement dbm;
     private boolean loggedIn = false;
-    private boolean firstStarted = true;
     private HashMap<String, User> userMap;
     private Statement stmt;
     private ResultSet rs;
@@ -37,10 +36,6 @@ public class LoginController implements Initializable {
 
     @FXML
     void login(ActionEvent event) throws SQLException, IOException {
-        if (firstStarted) {
-            firstStarted = false;
-            dbm = new DatabaseManagement();
-        }
         loggedIn = dbm.userLogin(inputName.getText(),pwdField.getText());
         if (loggedIn) {
             userMap.get(inputName.getText()).setLoggedIn(true);
@@ -63,5 +58,9 @@ public class LoginController implements Initializable {
 
     public void setUserMap(HashMap<String, User> userMap) throws SQLException, IOException {
         this.userMap = userMap;
+    }
+
+    public void setDbm(DatabaseManagement dbm) throws SQLException, IOException {
+        this.dbm = dbm;
     }
 }
