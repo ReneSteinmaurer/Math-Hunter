@@ -152,25 +152,26 @@ public class Main extends Application {
     }
 
     public void loadMathWindows() throws IOException {
-        stage.close();
-        stage = new Stage();
-        loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../view/mathScene.fxml"));
-        root = loader.load();
-        stage.setTitle("Math");
-        scene = new Scene(root);
-        mathController = loader.getController();
         try {
-            mathController.fillStartValue();
+            stage.close();
+            stage = new Stage();
+            loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../view/mathScene.fxml"));
+            root = loader.load();
+            stage.setTitle("Math");
+            scene = new Scene(root);
+            mathController = loader.getController();
+            mathController.setModel(this);
             mathController.setDbm(dbm);
             mathController.setUserMap(userMap);
+            mathController.fillStartValue();
+            scene.getStylesheets().add("../view/login.css");
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setScene(scene);
+            stage.show();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        scene.getStylesheets().add("../view/login.css");
-        stage.initStyle(StageStyle.DECORATED);
-        stage.setScene(scene);
-        stage.show();
     }
 
     public void loadAddWindow() throws IOException {

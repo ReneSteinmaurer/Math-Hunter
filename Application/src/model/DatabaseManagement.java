@@ -155,7 +155,7 @@ public class DatabaseManagement {
             rs=preparedStatement.executeQuery();
 
             while (rs.next()){
-                Calculations calculation= new Calculations(String.valueOf(rs.getString("calculation")), rs.getInt("result"));
+                Calculations calculation= new Calculations(rs.getString(2), rs.getInt(3));
                 calcMap.put(rows, calculation);
                 rows++;
             }

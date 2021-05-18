@@ -77,20 +77,14 @@ public class MathController implements Initializable {
         }
 
         random = r.nextInt(calcMap.size());
-
-
         calcField.setText(String.valueOf(calcMap.get(random).getCalculation()));
         dbm.setPointsFromUser(nickname, points.getValue());
-
-
-
 
     }
 
     @FXML
     void quit(ActionEvent event) throws IOException {
         model.loadApplication();
-
     }
 
     public void setModel(Main model) {
