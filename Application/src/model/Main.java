@@ -158,6 +158,13 @@ public class Main extends Application {
         stage.setTitle("Math");
         scene = new Scene(root);
         mathController = loader.getController();
+        try {
+            mathController.fillStartValue();
+            mathController.setDbm(dbm);
+            mathController.setUserMap(userMap);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         scene.getStylesheets().add("../view/login.css");
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
