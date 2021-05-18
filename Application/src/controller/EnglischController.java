@@ -31,6 +31,7 @@ public class EnglischController implements Initializable {
     private String nickname;
     private String difficulty;
     private boolean firstStarted;
+    private boolean addedVocabs = false;
     private Random r = new Random();
 
     @FXML
@@ -66,11 +67,15 @@ public class EnglischController implements Initializable {
     @FXML
     void addVocabulary(ActionEvent event) throws IOException {
         model.loadAddWindow();
+        addedVocabs = true;
     }
 
     @FXML
     void next(ActionEvent event) throws SQLException {
-        vocabMap = dbm.readVocabTable();
+        if (addedVocabs) {
+            vocabMap = dbm.readVocabTable();
+            addedVocabs = false;
+        }
         if (vocabMap.get(random).getEnglishWord().equals(translationField.getText())) {
             translationField.clear();
             points.setValue(points.getValue() + 1);
@@ -113,7 +118,7 @@ public class EnglischController implements Initializable {
         pointField.textProperty().bind(points.asString());
     }
 
-    public void fillStartValue() throws SQLException, IOException {
+    public void fillStartValue() throws SQLException {
         vocabMap = dbm.readVocabTable();
         for (User value : userMap.values()) {
             if (value.isLoggedIn()) {
