@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane fx:id="germanPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GermanController">
-
+<AnchorPane fx:id="germanPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #203647;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GermanController">
+   <children>
+      <Button layoutX="228.0" layoutY="200.0" mnemonicParsing="false" onAction="#backToMain" style="-fx-background-color: #68FCBC;" text="zurück zum Hautpmenü" />
+      <Label layoutX="171.0" layoutY="155.0" text="Derzeit noch nicht verfügbar!" textFill="#4da8da">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

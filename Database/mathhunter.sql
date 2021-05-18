@@ -27,13 +27,14 @@ create table if not exists vocabs
     id            int(100) not null primary key auto_increment,
     germanVocab   varchar(100),
     englischVocab varchar(100),
-    difficulty varchar(50)
+    difficulty    varchar(50)
 );
 
-create table if not exists calculations(
-    id int (100) not null primary key auto_increment,
+create table if not exists calculations
+(
+    id          int(100) not null primary key auto_increment,
     calculation varchar(100),
-    result int(100) not null
+    result      int(100) not null
 );
 
 DELIMITER $$
@@ -73,23 +74,31 @@ call addUser('root', 'admin', 'ADMIN');
 call addUser('test', 'admin', 'testPlayer');
 call addUser('test2', 'admin', 'test');
 
-call addVocab('Tisch', 'desk','1');
-call addVocab('unterscheiden', 'distingouish','2');
-call addVocab('Abend', 'evening','1');
-call addVocab('aber', 'however','1');
-call addVocab('alles', 'everything','1');
-call addVocab('installieren', 'install','1');
-call addVocab('anwenden', 'apply','1');
-call addVocab('Speicher', 'memory','1');
-call addVocab('Gerät', 'device','2');
-call addVocab('Detektor', 'detector','2');
-call addVocab('Fälschung', 'forgery','2');
+call addVocab('Tisch', 'desk', '1');
+call addVocab('unterscheiden', 'distingouish', '2');
+call addVocab('Abend', 'evening', '1');
+call addVocab('aber', 'however', '1');
+call addVocab('alles', 'everything', '1');
+call addVocab('installieren', 'install', '1');
+call addVocab('anwenden', 'apply', '1');
+call addVocab('Speicher', 'memory', '1');
+call addVocab('Gerät', 'device', '2');
+call addVocab('Detektor', 'detector', '2');
+call addVocab('Beilagen', 'sides', '2');
+call addVocab('Eierspeise', 'eggs', '2');
+call addVocab('Getränke', 'beverages', '2');
+call addVocab('Nudelgerichte', 'pasta', '2');
 
-insert into calculations (calculation, result) VALUES ('25+17', 42);
-insert into calculations (calculation, result) VALUES ('42+100', 142);
-insert into calculations (calculation, result) VALUES ('9*8', 72);
-insert into calculations (calculation, result) VALUES ('54/6', 9);
-insert into calculations (calculation, result) VALUES ('70-33', 37);
+insert into calculations (calculation, result)
+VALUES ('25+17', 42);
+insert into calculations (calculation, result)
+VALUES ('42+100', 142);
+insert into calculations (calculation, result)
+VALUES ('9*8', 72);
+insert into calculations (calculation, result)
+VALUES ('54/6', 9);
+insert into calculations (calculation, result)
+VALUES ('70-33', 37);
 
 
 

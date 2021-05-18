@@ -23,5 +23,10 @@
       <Label fx:id="translationLabel" layoutX="212.0" layoutY="79.0" text="Übersetzung:" textFill="#4da8da" />
       <TextField fx:id="pointField" layoutX="178.0" layoutY="159.0" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #007CC7;" />
       <Label fx:id="pointLabel" layoutX="130.0" layoutY="163.0" text="Punkte:" textFill="#4da8da" />
+      <Label fx:id="difficutlyLabel" layoutX="317.0" layoutY="21.0" prefHeight="33.0" prefWidth="83.0" text="Difficulty: 1" textFill="#4da8da">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
