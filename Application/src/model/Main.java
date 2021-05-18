@@ -49,6 +49,7 @@ public class Main extends Application {
             root = loader.load();
             stage.setTitle("Login");
             scene = new Scene(root);
+            userMap = dbm.getAllUsers();
             loginController = loader.getController();
             loginController.setModel(this);
             loginController.setDbm(dbm);
@@ -142,6 +143,7 @@ public class Main extends Application {
         stage.setTitle("German");
         scene = new Scene(root);
         germanController = loader.getController();
+        germanController.setModel(this);
         scene.getStylesheets().add("../view/login.css");
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);

@@ -113,19 +113,20 @@ public class DatabaseManagement {
                 if (pwd.equals(rs.getString(2))) {
                     loggedIn = true;
                     System.out.println("eingeloggt!");
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Username oder Passwort stimmen nicht überein!", ButtonType.OK);
+                    alert.showAndWait();
                 }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Username oder Passwort stimmen nicht überein!", ButtonType.OK);
-                alert.showAndWait();
             }
         }
         return loggedIn;
     }
 
-    public void addVocab(String germanWord, String englishWord) throws SQLException {
-        try (PreparedStatement ps = con.prepareStatement("call addVocab (?,?)")){
+    public void addVocab(String germanWord, String englishWord, String difficulty) throws SQLException {
+        try (PreparedStatement ps = con.prepareStatement("call addVocab (?,?,?)")){
             ps.setString(1, germanWord);
             ps.setString(2, englishWord);
+            ps.setString(3, difficulty);
 
             ps.execute();
         }
