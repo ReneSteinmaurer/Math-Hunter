@@ -58,6 +58,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.show();
         } catch (SQLException throwables) {
+            System.out.println("Error while loading DB..");
             throwables.printStackTrace();
         }
     }

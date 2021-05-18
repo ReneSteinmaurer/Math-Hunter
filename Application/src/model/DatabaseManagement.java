@@ -131,20 +131,17 @@ public class DatabaseManagement {
         }
     }
 
-    public HashMap<Integer, Vocabulary> readVocabTable(){
+    public HashMap<Integer, Vocabulary> readVocabTable() throws SQLException {
         int rowCount = 0;
         HashMap<Integer, Vocabulary> vocabMap = new HashMap<>();
         try(PreparedStatement preparedStatement=con.prepareStatement("Select * from vocabs")){
             rs=preparedStatement.executeQuery();
 
             while (rs.next()){
-                Vocabulary vocabulary= new Vocabulary(String.valueOf(rs.getString("germanVocab")), String.valueOf(rs.getString("englischVocab")));
+                Vocabulary vocabulary = new Vocabulary(rs.getString(2),rs.getString(3),rs.getString(4));
                 vocabMap.put(rowCount, vocabulary);
                 rowCount++;
             }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         return vocabMap;

@@ -1,10 +1,7 @@
 package controller;
 
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,40 +29,35 @@ public class EnglischController implements Initializable {
     private HashMap<String, User> userMap = new HashMap<>();
     private DatabaseManagement dbm;
     private String nickname;
+    private String difficulty;
+    private boolean firstStarted;
     private Random r = new Random();
 
     @FXML
     private AnchorPane englischPane;
-
     @FXML
     private Label vocabularyLabel;
-
     @FXML
     private Button quitButton;
-
     @FXML
     private Button nextButton;
-
     @FXML
     private Button addButton;
-
     @FXML
     private TextField wordField;
-
     @FXML
     private TextField translationField;
-
     @FXML
     private Label wordLabel;
-
     @FXML
     private Label translationLabel;
-
     @FXML
     private TextField pointField;
-
     @FXML
     private Label pointLabel;
+    @FXML
+    private Label difficutlyLabel;
+
 
     public void setModel(Main model) {
         this.model = model;
@@ -77,24 +69,37 @@ public class EnglischController implements Initializable {
     }
 
     @FXML
-    void next(ActionEvent event) throws SQLException, IOException {
-        System.out.println(random);
+    void next(ActionEvent event) throws SQLException {
+        vocabMap = dbm.readVocabTable();
         if (vocabMap.get(random).getEnglishWord().equals(translationField.getText())) {
-            // TODO: neue Vokabeln werden noch nicht vom Programm verwendet!
-            fillStartValue();
             translationField.clear();
-            points.setValue(points.getValue()+1);
+            points.setValue(points.getValue() + 1);
             System.out.println("Korrekt!");
         } else {
             translationField.clear();
-            if (points.getValue() >=2){
-                points.setValue(points.getValue()-1);
-            }
-            else {
+            if (points.getValue() >= 2) {
+                points.setValue(points.getValue() - 1);
+            } else {
                 model.loadGameOverWindow();
             }
         }
-        dbm.setPointsFromUser(nickname,points.getValue());
+
+        random = r.nextInt(vocabMap.size());
+        if (points.getValue() < 30) {
+            while (vocabMap.get(random).getDifficulty().equals("2")) {
+                random = r.nextInt(vocabMap.size());
+            }
+            difficulty = "1";
+        } else {
+            while (vocabMap.get(random).getDifficulty().equals("1")) {
+                random = r.nextInt(vocabMap.size());
+            }
+            difficulty = "2";
+        }
+
+        difficutlyLabel.setText("Difficulty: "+difficulty);
+        wordField.setText(String.valueOf(vocabMap.get(random).getGermanWord()));
+        dbm.setPointsFromUser(nickname, points.getValue());
     }
 
     @FXML
@@ -116,6 +121,9 @@ public class EnglischController implements Initializable {
                 points.setValue(dbm.getPointsFromUser(value.getNickname()));
             }
         }
+        if (points.getValue() < 30) difficulty = "1";
+        else if (points.getValue() >= 2) difficulty = "2";
+        difficutlyLabel.setText("Difficulty: "+difficulty);
         random = r.nextInt(vocabMap.size());
         wordField.setText(String.valueOf(vocabMap.get(random).getGermanWord()));
     }
