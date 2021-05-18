@@ -12,8 +12,11 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="pointLabel" layoutX="355.0" layoutY="21.0" text="Points:" textFill="#4da8da" />
-      <Label fx:id="amountOfPoints" layoutX="401.0" layoutY="21.0" prefHeight="17.0" prefWidth="30.0" style="-fx-background-color: #007CC7;" text="0" />
+      <Label fx:id="pointLabel" layoutX="346.0" layoutY="21.0" text="Points:" textFill="#4da8da">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="amountOfPoints" alignment="CENTER" layoutX="403.0" layoutY="21.0" prefHeight="17.0" prefWidth="28.0" style="-fx-background-color: #007CC7; -fx-padding: 1px;" text="0" />
       <Button fx:id="deutschButton" layoutX="140.0" layoutY="61.0" mnemonicParsing="false" onAction="#startGermanGame" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #68FCBC;" text="Deutsch" />
       <Button fx:id="deutschButton1" layoutX="140.0" layoutY="135.0" mnemonicParsing="false" onAction="#startMathGame" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #68FCBC;" text="Mathematik" />
       <Button fx:id="deutschButton11" layoutX="140.0" layoutY="209.0" mnemonicParsing="false" onAction="#startEnglischGame" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #68FCBC;" text="Englisch" />
