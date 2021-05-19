@@ -7,13 +7,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 public class DatabaseManagement {
     private Connection con;
     private ResultSet rs;
-    private Statement stmt;
 
     public DatabaseManagement() throws IOException, SQLException {
         Properties prop = new Properties();
@@ -27,7 +25,6 @@ public class DatabaseManagement {
             name = prop.getProperty("name");
             pwd = prop.getProperty("password");
             con = DriverManager.getConnection(url, name, pwd);
-            stmt = con.createStatement();
             System.out.println("Connected to db...");
         }
     }
@@ -167,7 +164,6 @@ public class DatabaseManagement {
         return calcMap;
 
     }
-
 
 
     public Connection getCon() {

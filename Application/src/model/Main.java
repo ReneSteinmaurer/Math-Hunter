@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -26,17 +25,14 @@ public class Main extends Application {
     private GermanController germanController = new GermanController();
     private EnglischController englischController = new EnglischController();
     private HashMap<String, User> userMap = new HashMap<>();
-    GameOverController gameOverController= new GameOverController();
-    AddVocabController addVocabController= new AddVocabController();
+    private GameOverController gameOverController= new GameOverController();
+    private AddVocabController addVocabController= new AddVocabController();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;
         dbm = new DatabaseManagement();
         userMap = dbm.getAllUsers();
-        for (User value : userMap.values()) {
-            System.out.println("Nickname: " +value.getNickname() +", Points: "+ value.getPoints()+"\n");
-        }
         loadLogin();
     }
 
